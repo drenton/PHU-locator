@@ -41,9 +41,9 @@ function parseHash(phus: NormalizedPHU[]): ParsedHash {
     const phu = phus.find(p => slugify(p.name_en) === slug);
     if (phu) return { view: 'locator', resultView: 'map', phuId: phu.id, region: null };
   }
-  if (path === 'map') return { view: 'locator', resultView: 'map', phuId: null, region };
-  // 'list', '', or anything else → list view
-  return { view: 'locator', resultView: 'list', phuId: null, region };
+  if (path === 'list') return { view: 'locator', resultView: 'list', phuId: null, region };
+  // '', 'map', or anything else → map view (default)
+  return { view: 'locator', resultView: 'map', phuId: null, region };
 }
 
 function buildHash(resultView: ResultView, selectedPHUId: number | null, region: string | null, phus: NormalizedPHU[]): string {
@@ -52,8 +52,8 @@ function buildHash(resultView: ResultView, selectedPHUId: number | null, region:
     const phu = phus.find(p => p.id === selectedPHUId);
     if (phu) return `phu/${slugify(phu.name_en)}`;
   }
-  // Build path + optional region param
-  const path = resultView === 'map' ? 'map' : 'list';
+  // Always use explicit #map or #list so links are shareable
+  const path = resultView === 'list' ? 'list' : 'map';
   if (region) return `${path}?region=${encodeURIComponent(region)}`;
   return path;
 }

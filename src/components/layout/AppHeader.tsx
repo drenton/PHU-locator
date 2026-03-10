@@ -31,7 +31,7 @@ export function AppHeader() {
           <div className="ontario-row">
             <div className="ontario-columns ontario-small-12 ontario-application-subheader__container">
               <p className="ontario-application-subheader__heading">
-                <a href="#list">
+                <a href="#">
                   {t('appTitle', language)}
                 </a>
               </p>
@@ -39,7 +39,7 @@ export function AppHeader() {
                 <ul className="ontario-application-subheader__menu ontario-show-for-large">
                   <li>
                     <a
-                      href="#list"
+                      href="#"
                       className={viewMode === 'locator' ? 'active' : ''}
                     >
                       {t('findYourPHU', language)}
