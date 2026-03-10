@@ -4,7 +4,7 @@ A modern prototype for finding Ontario's 34 Public Health Units (PHUs) by munici
 
 This prototype was built during a live coding session on March 9, 2026 with the OPS Product Management Community of Practice.
 
-For this project we started with three data files the ontario_public_health_units.json scraped from phdapps.health.gov.on.ca and Ontario_municipalities_EN.json and Ontario_municipalities_FR.json municipality data derived from this data set. [Data folder](./src/data) 
+For this project we started with three data files the ontario_public_health_units.json scraped from phdapps.health.gov.on.ca. From that file we derived tow more files (Ontario_municipalities_EN.json and Ontario_municipalities_FR.json). [Data folder](./src/data) 
 
 The remaning required data and inputs (map boundaries/shape data, the ontario design system, the FSA file) were created during the build process. 
 
