@@ -1,0 +1,287 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/typography.variables' as typography;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-weights.variables' as fontWeights;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+
+$logo-dir: '../logos' !default;
+
+:root {
+	--footer-expanded-supergraphic: url('#{$logo-dir}/footer-expanded-supergraphic-logo.svg');
+}
+
+/************************************************************
+    The following styles up until the next comment for
+    expanded footer specific styles are shared with the
+    simple footer.
+
+    Any style updates or additions will need to be
+    replicated in the simple-footer.scss file as well.
+************************************************************/
+.ontario-footer {
+	color: colours.$ontario-colour-white;
+	margin-top: spacing.$spacing-10;
+	padding: spacing.$spacing-9 spacing.$spacing-0;
+}
+
+.ontario-footer {
+	.ontario-columns *:last-child {
+		margin-bottom: spacing.$spacing-0;
+	}
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		&:not(.ontario-footer--default) .ontario-columns:first-child {
+			margin-bottom: spacing.$spacing-8;
+		}
+
+		.ontario-footer__expanded-bottom-section .ontario-columns:first-child {
+			margin-bottom: spacing.$spacing-0;
+		}
+	}
+}
+
+.ontario-footer__links-container {
+	list-style: none;
+	margin: spacing.$spacing-0 spacing.$spacing-0 spacing.$spacing-4 spacing.$spacing-0;
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		margin-bottom: spacing.$spacing-2;
+	}
+}
+
+.ontario-footer__links-container--inline {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		flex-direction: row;
+	}
+}
+
+.ontario-footer__links-container li {
+	padding: spacing.$spacing-1 spacing.$spacing-0;
+}
+
+.ontario-footer__link {
+	color: colours.$ontario-colour-white;
+	display: inline-block;
+	padding: spacing.$spacing-2 spacing.$spacing-0;
+	margin: spacing.$spacing-0;
+	text-decoration: underline;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+
+	&:visited,
+	&:active,
+	&:hover {
+		color: colours.$ontario-colour-white;
+	}
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		padding: spacing.$spacing-0;
+		margin: spacing.$spacing-0 spacing.$spacing-8 spacing.$spacing-4 spacing.$spacing-0;
+	}
+}
+
+/*************************************
+    Expanded footer specific styles
+**************************************/
+.ontario-footer p {
+	max-width: globalVariables.$standard-width;
+	width: globalVariables.$full-width;
+
+	a {
+		color: colours.$ontario-colour-white;
+		font-weight: fontWeights.$ontario-font-weights-semi-bold;
+
+		&:visited {
+			color: colours.$ontario-colour-white;
+		}
+
+		&:active {
+			color: darken(colours.$ontario-colour-white, 10);
+		}
+
+		&:focus,
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+.ontario-footer__links-container--two-column-list {
+	column-count: 1;
+	display: block;
+	margin: spacing.$spacing-0;
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		column-count: 2;
+
+		.ontario-footer__link {
+			padding: spacing.$spacing-0;
+			margin: spacing.$spacing-0 spacing.$spacing-4 spacing.$spacing-4 0;
+		}
+	}
+}
+
+.ontario-footer__links-container--social {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.ontario-footer__links-container--social .ontario-footer__link {
+	background: transparent;
+	border-radius: 45%;
+	margin: spacing.$spacing-0 spacing.$spacing-4 spacing.$spacing-3 spacing.$spacing-0;
+	padding: spacing.$spacing-0;
+	outline: none;
+
+	height: (spacing.$spacing-8 + spacing.$spacing-2);
+	width: (spacing.$spacing-8 + spacing.$spacing-2);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&:hover,
+	&:focus {
+		background-color: darken(colours.$ontario-colour-white, 100);
+
+		.ontario-icon {
+			fill: colours.$ontario-colour-white;
+		}
+	}
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		height: spacing.$spacing-8;
+		width: spacing.$spacing-8;
+	}
+}
+
+.ontario-footer__links-container--social .ontario-footer__link .ontario-icon {
+	fill: colours.$ontario-colour-white;
+	width: globalFunctions.px-to-rem(36);
+	height: globalFunctions.px-to-rem(36);
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		width: globalFunctions.px-to-rem(32);
+		height: globalFunctions.px-to-rem(32);
+	}
+}
+
+.ontario-button.ontario-footer__button {
+	background-color: colours.$ontario-colour-black;
+	border: globalFunctions.px-to-rem(2) solid colours.$ontario-colour-white;
+	border-color: colours.$ontario-colour-white;
+	color: colours.$ontario-colour-white;
+	margin-bottom: spacing.$spacing-6;
+
+	&:hover,
+	&:focus {
+		background-color: darken(colours.$ontario-colour-white, 70);
+	}
+
+	&:active {
+		background-color: darken(colours.$ontario-colour-white, 60);
+	}
+}
+
+.ontario-footer__button + .ontario-footer__links-container {
+	margin-top: spacing.$spacing-5;
+}
+
+.ontario-footer__expanded-top-section:before {
+	background-image: var(--footer-expanded-supergraphic);
+}
+
+.ontario-footer.ontario-footer--expanded {
+	padding-top: spacing.$spacing-0;
+	background-color: colours.$ontario-colour-black;
+	border-bottom: globalFunctions.px-to-rem(4) solid colours.$ontario-greyscale-70;
+}
+
+.ontario-footer__expanded-top-section {
+	background-color: darken(colours.$ontario-colour-white, 85);
+	padding: spacing.$spacing-9 spacing.$spacing-0;
+	position: relative;
+
+	&:before {
+		background-color: darken(colours.$ontario-colour-white, 80);
+		background-repeat: no-repeat;
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: globalVariables.$full-width;
+		height: 100%;
+		background-size: 165rem;
+		background-position: calc(50vw - 125rem) -64rem;
+
+		@media screen and (min-width: breakpoints.$small-breakpoint) {
+			background-size: 250rem;
+			background-position: calc(50vw - 195rem) -106rem;
+		}
+		@media screen and (min-width: breakpoints.$medium-breakpoint) {
+			background-size: 305rem;
+			background-position: calc(50vw - 222rem) -160rem;
+		}
+	}
+}
+
+.ontario-footer__expanded-top-section .ontario-footer__link {
+	text-decoration: underline;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+
+	&:active {
+		color: darken(colours.$ontario-colour-white, 10);
+	}
+}
+
+.ontario-footer__expanded-top-section ul {
+	margin-bottom: 0;
+}
+
+.ontario-expanded-footer__one-third-block {
+	margin-bottom: spacing.$spacing-0;
+
+	&:first-of-type,
+	&:nth-child(2) {
+		margin-bottom: spacing.$spacing-8;
+	}
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		margin-bottom: spacing.$spacing-0;
+
+		&:first-of-type {
+			margin-bottom: spacing.$spacing-8;
+		}
+
+		&:nth-child(2) {
+			margin-bottom: spacing.$spacing-0;
+		}
+	}
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		margin-bottom: spacing.$spacing-0;
+
+		&:first-of-type {
+			margin-bottom: spacing.$spacing-0;
+		}
+	}
+}
+
+.ontario-footer__expanded-bottom-section {
+	background-color: colours.$ontario-colour-black;
+	padding-top: spacing.$spacing-9;
+}

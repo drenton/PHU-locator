@@ -1,0 +1,240 @@
+/* ================================================
+   Search Autocomplete Styles
+   ================================================ */
+
+.phu-search {
+  position: relative;
+}
+
+.phu-search .ontario-label {
+  margin-bottom: 0.25rem;
+}
+
+.phu-search .ontario-hint {
+  font-size: 1.0625rem;
+  color: #4d4d4d;
+  margin-bottom: 0.75rem;
+}
+
+.phu-search__input-wrapper {
+  position: relative;
+}
+
+.phu-search__input-wrapper .ontario-input {
+  width: 100%;
+  padding-right: 2.5rem;
+  box-sizing: border-box;
+  margin-bottom: 0;
+  max-width: none;
+}
+
+.phu-search__input--loading {
+  color: #666;
+  font-style: italic;
+}
+
+/* X button inside input to clear text */
+.phu-search__input-clear {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.phu-search__input-clear .ontario-icon {
+  width: 20px;
+  height: 20px;
+  fill: #4d4d4d;
+}
+
+.phu-search__input-clear:hover .ontario-icon {
+  fill: #1a1a1a;
+}
+
+/* Actions row: Search button left, Clear search right */
+.phu-search__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.phu-search__btn {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Clear search — tertiary pill button with grey background */
+.phu-search__clear-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  color: #0066CC;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: background 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.phu-search__clear-all:hover {
+  background: #d0d0d0;
+  color: #004080;
+}
+
+.phu-search__clear-all .ontario-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Use my current location link */
+.phu-search__location-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  color: #0066CC;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.phu-search__location-btn:hover {
+  color: #004080;
+}
+
+.phu-search__location-btn:disabled {
+  color: #666;
+  cursor: wait;
+}
+
+.phu-search__location-btn .ontario-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.phu-search__status {
+  font-size: 0.8125rem;
+  color: #4d4d4d;
+  padding: 0.5rem 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.phu-search__error {
+  margin-top: 0.5rem;
+}
+
+.phu-search__error .ontario-alert__body p {
+  font-size: 0.875rem;
+}
+
+/* ---- Suggestions Dropdown ---- */
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #fff;
+  border: 2px solid #0066CC;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.search-suggestions__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.1s ease;
+  font-family: 'Open Sans', sans-serif;
+  gap: 0.5rem;
+}
+
+.search-suggestions__item:last-child {
+  border-bottom: none;
+}
+
+.search-suggestions__item:hover,
+.search-suggestions__item--active {
+  background: #e8f0fe;
+}
+
+.search-suggestions__content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.search-suggestions__text {
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.search-suggestions__text strong {
+  font-weight: 700;
+}
+
+.search-suggestions__phu-name {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.search-suggestion__badge {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.125rem 0.5rem;
+  border-radius: 2px;
+  font-family: 'Open Sans', sans-serif;
+  white-space: nowrap;
+}
+
+.search-suggestion__badge--municipality {
+  background: #e8f0fe;
+  color: #0046a0;
+}
+
+.search-suggestion__badge--phu {
+  background: #e6f4ea;
+  color: #1a7431;
+}
+
+.search-suggestion__badge--region {
+  background: #fef3e5;
+  color: #8a5700;
+}

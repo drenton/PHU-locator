@@ -1,0 +1,62 @@
+@use 'sass:meta';
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/typography.variables' as typography;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/mixins/global.mixins' as globalMixins;
+
+.ontario-callout,
+.ontario-aside {
+	border-left: spacing.$spacing-1 solid colours.$ontario-colour-dark-teal;
+	padding: spacing.$spacing-5;
+
+	* {
+		max-width: globalVariables.$standard-width;
+
+		&:last-child {
+			margin-bottom: spacing.$spacing-2;
+		}
+	}
+}
+
+.ontario-callout {
+	margin: spacing.$spacing-6 spacing.$spacing-0 spacing.$spacing-7 spacing.$spacing-0;
+	background-color: colours.$ontario-greyscale-5;
+}
+
+.ontario-aside {
+	margin: spacing.$spacing-6 spacing.$spacing-0 spacing.$spacing-7 spacing.$spacing-6;
+}
+
+@media screen and (max-width: breakpoints.$small-breakpoint) {
+	.ontario-aside {
+		margin: spacing.$spacing-6 spacing.$spacing-0 spacing.$spacing-7 spacing.$spacing-4;
+	}
+}
+
+.ontario-callout__title,
+.ontario-aside__title {
+	margin-bottom: spacing.$spacing-4;
+}
+
+// -----------------------------------
+//   Callout & Aside border variants
+// -----------------------------------
+$highlight-colours: (
+	'teal': colours.$ontario-colour-dark-teal,
+	'gold': colours.$ontario-colour-dark-gold,
+	'yellow': colours.$ontario-colour-dark-yellow,
+	'taupe': colours.$ontario-colour-dark-taupe,
+	'green': colours.$ontario-colour-dark-green,
+	'lime': colours.$ontario-colour-dark-lime,
+	'sky': colours.$ontario-colour-dark-sky,
+	'blue': colours.$ontario-colour-dark-blue,
+	'purple': colours.$ontario-colour-dark-purple,
+);
+
+@each $color-name, $hex in $highlight-colours {
+	.ontario-border-highlight--#{$color-name} {
+		border-color: $hex !important;
+	}
+}

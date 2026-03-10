@@ -1,0 +1,101 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/fonts.variables' as fonts;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/placeholder/focus.placeholders' as placeholders;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/line-heights.variables' as lineheight;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-sizes.variables' as fontSizes;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-weights.variables' as fontWeights;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+
+.ontario-input {
+	border: globalFunctions.px-to-rem(2) solid colours.$ontario-colour-black;
+	border-radius: globalVariables.$global-radius;
+	box-sizing: border-box;
+	color: colours.$ontario-colour-black;
+	display: block;
+	font-size: fontSizes.$ontario-font-size-standard-body-text;
+	font-family: fonts.$ontario-font-open-sans;
+	line-height: lineheight.$ontario-line-height-7;
+	margin: spacing.$spacing-0 spacing.$spacing-0 spacing.$spacing-7;
+	max-width: globalVariables.$standard-width;
+	width: globalVariables.$full-width;
+	padding: 0.625rem spacing.$spacing-4;
+	transition: box-shadow 0.1s ease-in-out;
+
+	&:focus,
+	&:active {
+		@extend %ontario-focus;
+	}
+}
+
+.ontario-input--2-char-width {
+	max-width: 8ex;
+	min-width: 8ex;
+}
+
+.ontario-input--3-char-width {
+	max-width: 10ex;
+	min-width: 10ex;
+}
+
+.ontario-input--4-char-width {
+	max-width: 12ex;
+	min-width: 12ex;
+}
+
+.ontario-input--5-char-width {
+	max-width: 14ex;
+	min-width: 14ex;
+}
+
+.ontario-input--7-char-width {
+	max-width: 17ex;
+	min-width: 17ex;
+}
+
+.ontario-input--10-char-width {
+	max-width: 23ex;
+	width: 100%;
+}
+
+.ontario-input--20-char-width {
+	max-width: 41ex;
+	width: 100%;
+}
+
+//General forms
+.ontario-form-group:last-of-type {
+	margin-bottom: 3rem;
+
+	.ontario-checkboxes,
+	.ontario-radios {
+		margin-bottom: spacing.$spacing-0;
+	}
+}
+
+//Date inputs
+
+.ontario-date__group {
+	display: flex;
+
+	label {
+		font-weight: fontWeights.$ontario-font-weights-semi-bold;
+	}
+
+	input {
+		margin-top: spacing.$spacing-4;
+	}
+}
+
+.ontario-date__group-input {
+	display: flex;
+	flex-direction: column;
+	margin-right: spacing.$spacing-5;
+}
+
+.ontario-date--error {
+	input {
+		border: 0.125rem solid colours.$ontario-colour-alert;
+	}
+}

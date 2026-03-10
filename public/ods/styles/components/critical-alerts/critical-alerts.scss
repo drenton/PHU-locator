@@ -1,0 +1,49 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/typography.variables' as typography;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-weights.variables' as fontWeights;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+
+.ontario-critical-alert {
+	background-color: colours.$ontario-colour-warning;
+	font-weight: fontWeights.$ontario-font-weights-normal;
+	margin: spacing.$spacing-0;
+	padding: spacing.$spacing-4 spacing.$spacing-0;
+	position: relative;
+	z-index: 5;
+}
+
+.ontario-critical-alert__body {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+}
+
+.ontario-critical-alert__icon svg {
+	width: globalFunctions.px-to-rem(28);
+	height: globalFunctions.px-to-rem(28);
+	margin: spacing.$spacing-0 0.85rem spacing.$spacing-0 spacing.$spacing-0;
+}
+
+.ontario-critical-alert p {
+	margin: spacing.$spacing-0;
+	padding: spacing.$spacing-0;
+	line-height: 1.8;
+}
+
+.ontario-critical-alert a {
+	color: colours.$ontario-colour-black;
+	font-weight: fontWeights.$ontario-font-weights-bold;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+
+	&:visited {
+		color: colours.$ontario-colour-black;
+	}
+}

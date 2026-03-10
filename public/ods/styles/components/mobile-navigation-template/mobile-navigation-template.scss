@@ -1,0 +1,84 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-sizes.variables' as fontSize;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/fonts.variables' as fonts;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-weights.variables' as fontWeights;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/z-index.variables' as zIndex;
+
+$mobile-menu-tab-line-height: 2.1875rem;
+
+.ontario-mobile-menu__tabs {
+	display: flex;
+	background: colours.$ontario-colour-white;
+}
+
+.ontario-mobile-menu__tab {
+	background: colours.$ontario-greyscale-70;
+	border: none;
+	color: colours.$ontario-colour-white;
+	cursor: pointer;
+	flex: 1;
+	font-family: fonts.$ontario-font-open-sans;
+	font-weight: fontWeights.$ontario-font-weights-semi-bold;
+	font-size: fontSize.$ontario-font-size-large;
+	line-height: $mobile-menu-tab-line-height;
+	padding: spacing.$spacing-4 spacing.$spacing-6;
+
+	&:hover {
+		background: colours.$ontario-greyscale-60;
+	}
+
+	&:active,
+	&:focus {
+		box-shadow: 0 0 0 4px colours.$ontario-colour-focus inset;
+	}
+}
+
+.ontario-mobile-menu__tab[aria-selected='true'] {
+	background: colours.$ontario-colour-white;
+	color: colours.$ontario-colour-black;
+}
+
+.ontario-mobile-menu__panel {
+	display: none;
+	visibility: hidden;
+	opacity: 0;
+	transform: translateY(-100%);
+	transition: opacity 0.2s, transform 0.3s;
+}
+
+.ontario-mobile-menu__panel--active {
+	display: block;
+	visibility: visible;
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.ontario-mobile-menu__panel--active .ontario-navigation__container,
+.ontario-mobile-menu__panel--active .ontario-sign-in-navigation__container {
+	visibility: visible;
+	transform: translateY(0);
+	display: block;
+	opacity: 1;
+	position: relative;
+	z-index: zIndex.$ontario-z-index-behind-high;
+}
+
+@media screen and (min-width: breakpoints.$medium-breakpoint) {
+	.ontario-navigation,
+	.ontario-sign-in-navigation {
+		display: block;
+	}
+}
+
+@media screen and (max-width: breakpoints.$medium-breakpoint) {
+	.ontario-navigation,
+	.ontario-sign-in-navigation {
+		display: none;
+	}
+
+	.ontario-application-header .ontario-navigation {
+		display: block;
+	}
+}

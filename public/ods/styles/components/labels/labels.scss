@@ -1,0 +1,57 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/fonts.variables' as fonts;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/line-heights.variables' as lineheight;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-sizes.variables' as fontSizes;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-weights.variables' as fontWeights;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/typography.variables';
+
+.ontario-label {
+	cursor: pointer;
+	color: colours.$ontario-colour-black;
+	font-family: fonts.$ontario-font-raleway-modified;
+	font-size: 1.1875rem;
+	font-weight: fontWeights.$ontario-font-weights-bold;
+	line-height: lineheight.$ontario-line-height-7;
+	margin: spacing.$spacing-0 spacing.$spacing-0 spacing.$spacing-4 spacing.$spacing-0;
+	max-width: 38.75em;
+	white-space: normal;
+	width: globalVariables.$full-width;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		font-size: 1.125rem;
+		line-height: lineheight.$ontario-line-height-8;
+	}
+}
+
+.ontario-label--large {
+	font-size: 1.75rem;
+	letter-spacing: 0.02rem;
+	line-height: lineheight.$ontario-line-height-1;
+	max-width: 26.25em;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		font-size: 1.4375rem;
+		line-height: lineheight.$ontario-line-height-5;
+	}
+}
+
+h1 {
+	.ontario-label--heading {
+		@extend %h1-styles;
+		display: inline-block;
+		margin: spacing.$spacing-0;
+	}
+}
+
+.ontario-label__flag {
+	font-family: fonts.$ontario-font-open-sans;
+	font-size: fontSizes.$ontario-font-size-standard-body-text;
+	font-weight: fontWeights.$ontario-font-weights-normal;
+
+	&:before {
+		content: '\a0';
+	}
+}

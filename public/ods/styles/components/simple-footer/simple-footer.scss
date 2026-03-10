@@ -1,0 +1,122 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+
+$logo-dir: '../logos' !default;
+
+:root {
+	--footer-default-supergraphic: url('#{$logo-dir}/footer-default-supergraphic-logo.svg');
+}
+
+/************************************************************
+    The following styles up until the next comment for
+    simple footer specific styles are shared with the
+    expanded footer.
+
+    Any style updates or additions will need to be
+    replicated in the expanded-footer.scss file as well.
+************************************************************/
+.ontario-footer {
+	color: colours.$ontario-colour-white;
+	margin-top: spacing.$spacing-10;
+	padding: spacing.$spacing-9 spacing.$spacing-0;
+}
+
+.ontario-footer {
+	.ontario-columns *:last-child {
+		margin-bottom: spacing.$spacing-0;
+	}
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		&:not(.ontario-footer--default) .ontario-columns:first-child {
+			margin-bottom: spacing.$spacing-8;
+		}
+
+		.ontario-footer__expanded-bottom-section .ontario-columns:first-child {
+			margin-bottom: spacing.$spacing-0;
+		}
+	}
+}
+
+.ontario-footer__links-container {
+	list-style: none;
+	margin: spacing.$spacing-0 spacing.$spacing-0 spacing.$spacing-4 spacing.$spacing-0;
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		margin-bottom: spacing.$spacing-2;
+	}
+}
+
+.ontario-footer__links-container--inline {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		flex-direction: row;
+	}
+}
+
+.ontario-footer__links-container li {
+	padding: spacing.$spacing-1 spacing.$spacing-0;
+}
+
+.ontario-footer__link {
+	color: colours.$ontario-colour-white;
+	display: inline-block;
+	padding: spacing.$spacing-2 spacing.$spacing-0;
+	margin: spacing.$spacing-0;
+	text-decoration: underline;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+
+	&:visited,
+	&:active,
+	&:hover {
+		color: colours.$ontario-colour-white;
+	}
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		padding: 0;
+		margin: spacing.$spacing-0 spacing.$spacing-8 spacing.$spacing-4 spacing.$spacing-0;
+	}
+}
+
+/*************************************
+    Simple footer specific styles
+*************************************/
+/* Supergraphic background */
+.ontario-footer--default {
+	position: relative;
+	background-color: colours.$ontario-colour-black;
+	border-bottom: globalFunctions.px-to-rem(4) solid colours.$ontario-greyscale-70;
+
+	&:before {
+		background-image: var(--footer-default-supergraphic);
+		background-size: 112.5rem;
+		background-position: calc(50vw - 73.5rem) -64rem;
+		background-color: darken(colours.$ontario-colour-white, 80);
+		background-repeat: no-repeat;
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: globalVariables.$full-width;
+		height: 100%;
+
+		@media screen and (min-width: breakpoints.$small-breakpoint) {
+			background-size: 180rem;
+			background-position: calc(50vw - 120rem) -106rem;
+		}
+
+		@media screen and (min-width: breakpoints.$medium-breakpoint) {
+			background-size: 275rem;
+			background-position: calc(50vw - 187rem) -160rem;
+		}
+	}
+}

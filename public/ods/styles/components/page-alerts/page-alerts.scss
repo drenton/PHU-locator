@@ -1,0 +1,128 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+
+.ontario-alert {
+	border-width: 0 0 0 4px;
+	border-style: solid;
+	padding: spacing.$spacing-5;
+	margin: spacing.$spacing-6 spacing.$spacing-0 spacing.$spacing-7 spacing.$spacing-0;
+}
+
+.ontario-alert__header {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.ontario-alert__header-icon {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 0.95rem;
+
+	svg {
+		width: globalFunctions.px-to-rem(36);
+		height: globalFunctions.px-to-rem(36);
+
+		@media screen and (max-width: breakpoints.$small-breakpoint) {
+			width: globalFunctions.px-to-rem(32);
+			height: globalFunctions.px-to-rem(32);
+		}
+	}
+}
+
+.ontario-alert__header-title {
+	margin-bottom: spacing.$spacing-3;
+	padding-top: globalFunctions.px-to-rem(2);
+}
+
+.ontario-alert__body {
+	margin-left: 3.25rem;
+	max-width: globalVariables.$standard-width;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		margin-left: 0;
+	}
+}
+
+.ontario-alert__body p {
+	margin-top: spacing.$spacing-0;
+
+	&:last-of-type {
+		margin-bottom: spacing.$spacing-2;
+	}
+}
+
+.ontario-alert__body p:last-of-type + ul {
+	margin-top: spacing.$spacing-4;
+}
+
+.ontario-alert__body ul:last-of-type {
+	margin-bottom: spacing.$spacing-2;
+}
+
+.ontario-alert--error ul {
+	margin-left: 1.25rem;
+}
+
+.ontario-alert--error ul:last-of-type {
+	margin-bottom: spacing.$spacing-2;
+}
+
+// ---------------------
+//    Alert variations
+// ---------------------
+// informational alert
+.ontario-alert--informational {
+	border-color: colours.$ontario-colour-information;
+	background-color: colours.$ontario-colour-information-light;
+}
+
+.ontario-alert--informational svg {
+	fill: colours.$ontario-colour-information;
+}
+
+// warning alert
+.ontario-alert--warning {
+	border-color: colours.$ontario-colour-warning;
+	background-color: colours.$ontario-colour-warning-light;
+}
+
+.ontario-alert--warning svg {
+	fill: colours.$ontario-colour-warning;
+}
+
+// success alert
+.ontario-alert--success {
+	border-color: colours.$ontario-colour-success;
+	background-color: colours.$ontario-colour-success-light;
+}
+
+.ontario-alert--success svg {
+	fill: colours.$ontario-colour-success;
+}
+
+// error alert
+.ontario-alert--error {
+	border-color: colours.$ontario-colour-alert;
+	background-color: colours.$ontario-colour-alert-light;
+}
+
+.ontario-alert--error svg {
+	fill: colours.$ontario-colour-alert;
+}
+
+.ontario-alert--error a {
+	color: colours.$ontario-colour-alert;
+
+	&:hover,
+	&:focus {
+		color: #6b0000;
+	}
+
+	&:active {
+		color: #280000;
+	}
+}

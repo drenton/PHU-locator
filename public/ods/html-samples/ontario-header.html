@@ -1,0 +1,518 @@
+
+
+<div class="documentation-only">
+    <!-- documentation-only class is used only for documentation, please don't wrap header using this div/class -->
+    <div class="ontario-header__container">
+        <header class="ontario-header" id="ontario-header">
+            <div class="ontario-row">
+                <div
+                    class="ontario-header__logo-container ontario-columns ontario-small-10 ontario-medium-8 ontario-large-3"
+                >
+                    <a href="https://www.ontario.ca/page/government-ontario">
+                        <img
+                            role="img"
+                            class="ontario-show-for-medium"
+                            src="../../logos/ontario-logo--desktop.svg"
+                            alt="Ontario.ca homepage"
+                        />
+                        <img
+                            role="img"
+                            class="ontario-show-for-small-only"
+                            src="../../logos/ontario-logo--mobile.svg"
+                            alt="Ontario.ca homepage"
+                        />
+                    </a>
+                </div>
+
+                <form
+                    name="searchForm"
+                    id="ontario-search-form-container"
+                    onsubmit="return false"
+                    class="ontario-header__search-container ontario-columns ontario-small-10 ontario-medium-6 ontario-large-5"
+                    novalidate
+                >
+                    <label
+                        for="ontario-search-input-field"
+                        class="ontario-show-for-sr"
+                    ></label>
+                    <input
+                        type="text"
+                        name="search"
+                        id="ontario-search-input-field"
+                        autocomplete="off"
+                        aria-autocomplete="none"
+                        class="ontario-input ontario-header__search-input"
+                    />
+                    <input
+                        class="ontario-header__search-reset"
+                        id="ontario-search-reset"
+                        type="reset"
+                        value=""
+                        aria-label="Clear field"
+                    />
+                    <button
+                        class="ontario-header__search-submit"
+                        id="ontario-search-submit"
+                        type="submit"
+                        onclick="doSearch()"
+                    >
+                        <span class="ontario-show-for-sr">Submit</span>
+                        <svg
+                            class="ontario-icon"
+                            focusable="false"
+                            sol:category="primary"
+                            viewBox="0 0 24 24"
+                            preserveAspectRatio="xMidYMid meet"
+                        >
+                            <use xlink:href="#ontario-icon-search"></use>
+                        </svg>
+                    </button>
+                </form>
+                <div
+                    class="ontario-header__nav-right-container ontario-columns ontario-small-4 ontario-medium-4 ontario-large-4"
+                >
+                    <a
+                        href="#"
+                        hreflang="fr"
+                        lang="fr"
+                        class="ontario-header__language-toggler ontario-header-button"
+                    >
+                        <abbr
+                            title="Français"
+                            class="ontario-show-for-small-only"
+                        >
+                            FR
+                        </abbr>
+                        <span class="ontario-show-for-medium">
+                            Français
+                        </span>
+                    </a>
+
+                    <button
+                        class="ontario-header__search-toggler ontario-header-button ontario-header-button--without-outline ontario-hide-for-large"
+                        id="ontario-header-search-toggler"
+                        aria-controls="ontario-search-form-container"
+                        type="button"
+                        aria-label="Search"
+                    >
+                        <svg
+                            class="ontario-icon"
+                            focusable="false"
+                            sol:category="primary"
+                            viewBox="0 0 24 24"
+                            preserveAspectRatio="xMidYMid meet"
+                        >
+                            <use xlink:href="#ontario-icon-search"></use>
+                        </svg>
+                        <span class="ontario-show-for-medium ontario-show">
+                            Search
+                        </span>
+                    </button>
+
+                    <!-- Topics (menu) button -->
+                    <button
+                        class="ontario-header__menu-toggle ontario-header-button ontario-header-button--desktop ontario-header-button--with-outline"
+                        id="ontario-header-menu-toggler"
+                        aria-controls="ontario-navigation"
+                        aria-label="Show navigation menu"
+                        type="button"
+                        aria-expanded="false"
+                    >
+                        <svg class="ontario-icon ontario-hide-for-large" focusable="false" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+                            <use xlink:href="#ontario-icon-menu" id="ontario-header-menu-icon-mobile"></use>
+                        </svg>
+                        <span class="ontario-hide-for-medium-only ontario-hide-for-small-only">Topics</span>
+                        <span class="ontario-hide-for-large">Menu</span>
+                        <svg class="ontario-icon ontario-hide-for-medium-only ontario-hide-for-small-only" focusable="false" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+                            <use xlink:href="#ontario-icon-dropdown-arrow"  id="ontario-header-menu-icon"></use>
+                        </svg>
+                    </button>
+
+                    <!-- Sign in button -->
+                    <button
+                        class="ontario-header__sign-in-toggle ontario-header-button ontario-header-button--desktop ontario-hide-for-small-only ontario-hide-for-medium-only"
+                        id="ontario-header-sign-in-toggler"
+                        aria-controls="ontario-sign-in-navigation"
+                        type="button"
+                        aria-expanded="false"
+                    >
+                        <span>Sign in</span>
+                        <svg class="ontario-icon" focusable="false" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+                            <use xlink:href="#ontario-icon-dropdown-arrow" id="ontario-header-sign-in-icon"></use>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="ontario-header__search-close-container ontario-columns ontario-small-2 ontario-medium-3">
+                    <button
+                        class="ontario-header__search-close ontario-header-button ontario-header-button--without-outline" id="ontario-header-search-close"
+                        aria-label="Close search bar"
+                        type="button">
+                        <span aria-hidden="true">close</span>
+                        <svg class="ontario-icon" focusable="false" sol:category="primary" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+                            <use xlink:href="#ontario-icon-close"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="ontario-hide-for-small-only ontario-hide-for-medium-only">
+                <nav
+                    class="ontario-navigation ontario-navigation--desktop"
+                    id="ontario-navigation"
+                >
+                    <div
+                        class="ontario-navigation__container"
+                        id="ontario-navigation"
+                    >
+                        <button
+                            class="ontario-header__menu-toggle ontario-header-button ontario-header-button--with-outline ontario-hide-for-medium-only ontario-hide-for-small-only"
+                            id="ontario-header-nav-close-button"
+                            aria-controls="ontario-navigation"
+                            aria-label="Hide navigation menu"
+                        >
+                            <svg class="ontario-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <use xlink:href="#ontario-icon-close"></use>
+                            </svg>
+                            <span></span>
+                        </button>
+                        <ul id="ontario-navigation" role="menu">
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Arts and culture</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Business and economy</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Driving and roads</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Education and training</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Environment and energy</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Government</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Health and wellness</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Home and community</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Jobs and employment</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Law and safety</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Rural and north</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Taxes and benefits</span>
+                                	</a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item">
+                                	<a href="#" role="menuitem">
+                                		<span class="ontario-header-navigation__menu-item-label">Travel and recreation</span>
+                                	</a>
+                                </li>
+                                        </ul>
+                    </div>
+                </nav>
+                <nav
+                    class="ontario-sign-in-navigation ontario-sign-in-navigation--desktop"
+                    id="ontario-sign-in-navigation"
+                >
+                    <div
+                        class="ontario-navigation__container ontario-navigation__container--sign-in"
+                        id="sign-in-menu-list"
+                    >
+                        <button
+                            class="ontario-header__menu-toggle ontario-header-button ontario-header-button--with-outline ontario-hide-for-medium-only ontario-hide-for-small-only"
+                            id="ontario-header-sign-in-nav-toggler"
+                            aria-controls="sign-in-menu-list"
+                            aria-label="Hide navigation menu"
+                        >
+                            <svg class="ontario-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <use xlink:href="#ontario-icon-close"></use>
+                            </svg>
+                            <span></span>
+                        </button>
+                        <ul id="sign-in-menu-list" role="menu">
+                                <li class="ontario-header-navigation__menu-item" role="none">
+                                    <a href="#" role="menuitem">
+                                        <span class="ontario-header-navigation__menu-item-label">Account name</span>
+                                            <span id="service-ontario-account-desc" class="ontario-header-navigation__menu-item-description">Brief description of the account.</span>
+                                    </a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item" role="none">
+                                    <a href="#" role="menuitem">
+                                        <span class="ontario-header-navigation__menu-item-label">Account name</span>
+                                            <span id="ontario-business-account-desc" class="ontario-header-navigation__menu-item-description">Brief description of the account.</span>
+                                    </a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item" role="none">
+                                    <a href="#" role="menuitem">
+                                        <span class="ontario-header-navigation__menu-item-label">Account name that wraps to two lines</span>
+                                            <span id="my-benefits-desc" class="ontario-header-navigation__menu-item-description">Example of a longer description that continues onto a second line.</span>
+                                    </a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item" role="none">
+                                    <a href="#" role="menuitem">
+                                        <span class="ontario-header-navigation__menu-item-label">Account name that wraps to two lines</span>
+                                            <span id="osap-desc" class="ontario-header-navigation__menu-item-description">Brief description of the account.</span>
+                                    </a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item" role="none">
+                                    <a href="#" role="menuitem">
+                                        <span class="ontario-header-navigation__menu-item-label">Account name</span>
+                                            <span id="oinp-desc" class="ontario-header-navigation__menu-item-description">Example of a longer description that continues onto a second line.</span>
+                                    </a>
+                                </li>
+                                <li class="ontario-header-navigation__menu-item ontario-header-navigation__menu-item--with-icon" role="none">
+                                    <a href="#" role="menuitem">
+                                        <span class="ontario-header-navigation__menu-item-label">
+                                            <svg class="ontario-icon" focusable="false" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                                                <use xlink:href="#ontario-icon-more-accounts" id="ontario-header-more-accounts-icon"></use>
+                                            </svg>More accounts
+                                        </span>
+                                    </a>
+                                </li>
+                        </ul>
+                    </div>
+                </nav>
+        </div>
+        <div class="ontario-hide-for-large">
+            <nav id="ontario-mobile-menu" class="ontario-mobile-menu" hidden>
+                <div class="ontario-mobile-menu__tabs" role="tablist">
+                    <button
+                        class="ontario-mobile-menu__tab ontario-mobile-menu__tab--topics"
+                        id="ontario-mobile-menu-tab-topics"
+                        role="tab"
+                        aria-selected="true"
+                        aria-controls="ontario-mobile-menu-panel-topics"
+                        tabindex="0"
+                        type="button"
+                    >
+                        Topics
+                    </button>
+                    <button
+                        class="ontario-mobile-menu__tab ontario-mobile-menu__tab--sign-in"
+                        id="ontario-mobile-menu-tab-sign-in"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="ontario-mobile-menu-panel-sign-in"
+                        tabindex="-1"
+                        type="button"
+                    >
+                        Sign in
+                    </button>
+                </div>
+                <div
+                    class="ontario-mobile-menu__panel ontario-mobile-menu__panel--topics ontario-mobile-menu__panel--active"
+                    id="ontario-mobile-menu-panel-topics"
+                    role="tabpanel"
+                    aria-labelledby="ontario-mobile-menu-tab-topics"
+                    hidden
+                >
+                        <nav
+                            
+                            
+                        >
+                            <div
+                                class="ontario-navigation__container"
+                                id="ontario-navigation"
+                            >
+                                <button
+                                    class="ontario-header__menu-toggle ontario-header-button ontario-header-button--with-outline ontario-hide-for-medium-only ontario-hide-for-small-only"
+                                    id="ontario-header-nav-close-button"
+                                    aria-controls="ontario-navigation"
+                                    aria-label="Hide navigation menu"
+                                >
+                                    <svg class="ontario-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                        <use xlink:href="#ontario-icon-close"></use>
+                                    </svg>
+                                    <span></span>
+                                </button>
+                                <ul id="ontario-navigation" role="menu">
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Arts and culture</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Business and economy</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Driving and roads</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Education and training</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Environment and energy</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Government</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Health and wellness</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Home and community</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Jobs and employment</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Law and safety</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Rural and north</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Taxes and benefits</span>
+                                        	</a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item">
+                                        	<a href="#" role="menuitem">
+                                        		<span class="ontario-header-navigation__menu-item-label">Travel and recreation</span>
+                                        	</a>
+                                        </li>
+                                                </ul>
+                            </div>
+                        </nav>
+                </div>
+                <div
+                    class="ontario-mobile-menu__panel ontario-mobile-menu__panel--sign-in"
+                    id="ontario-mobile-menu-panel-sign-in"
+                    role="tabpanel"
+                    aria-labelledby="ontario-mobile-menu-tab-sign-in"
+                    hidden
+                >
+                        <nav
+                            
+                            
+                        >
+                            <div
+                                class="ontario-navigation__container ontario-navigation__container--sign-in"
+                                id="sign-in-menu-list"
+                            >
+                                <button
+                                    class="ontario-header__menu-toggle ontario-header-button ontario-header-button--with-outline ontario-hide-for-medium-only ontario-hide-for-small-only"
+                                    id="ontario-header-sign-in-nav-toggler"
+                                    aria-controls="sign-in-menu-list"
+                                    aria-label="Hide navigation menu"
+                                >
+                                    <svg class="ontario-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                        <use xlink:href="#ontario-icon-close"></use>
+                                    </svg>
+                                    <span></span>
+                                </button>
+                                <ul id="sign-in-menu-list" role="menu">
+                                        <li class="ontario-header-navigation__menu-item" role="none">
+                                            <a href="#" role="menuitem">
+                                                <span class="ontario-header-navigation__menu-item-label">Account name</span>
+                                                    <span id="service-ontario-account-desc" class="ontario-header-navigation__menu-item-description">Brief description of the account.</span>
+                                            </a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item" role="none">
+                                            <a href="#" role="menuitem">
+                                                <span class="ontario-header-navigation__menu-item-label">Account name</span>
+                                                    <span id="ontario-business-account-desc" class="ontario-header-navigation__menu-item-description">Brief description of the account.</span>
+                                            </a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item" role="none">
+                                            <a href="#" role="menuitem">
+                                                <span class="ontario-header-navigation__menu-item-label">Account name that wraps to two lines</span>
+                                                    <span id="my-benefits-desc" class="ontario-header-navigation__menu-item-description">Example of a longer description that continues onto a second line.</span>
+                                            </a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item" role="none">
+                                            <a href="#" role="menuitem">
+                                                <span class="ontario-header-navigation__menu-item-label">Account name that wraps to two lines</span>
+                                                    <span id="osap-desc" class="ontario-header-navigation__menu-item-description">Brief description of the account.</span>
+                                            </a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item" role="none">
+                                            <a href="#" role="menuitem">
+                                                <span class="ontario-header-navigation__menu-item-label">Account name</span>
+                                                    <span id="oinp-desc" class="ontario-header-navigation__menu-item-description">Example of a longer description that continues onto a second line.</span>
+                                            </a>
+                                        </li>
+                                        <li class="ontario-header-navigation__menu-item ontario-header-navigation__menu-item--with-icon" role="none">
+                                            <a href="#" role="menuitem">
+                                                <span class="ontario-header-navigation__menu-item-label">
+                                                    <svg class="ontario-icon" focusable="false" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                                                        <use xlink:href="#ontario-icon-more-accounts" id="ontario-header-more-accounts-icon"></use>
+                                                    </svg>More accounts
+                                                </span>
+                                            </a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </nav>
+                </div>
+            	<div class="ontario-overlay"></div>
+            </nav>
+        </div>
+    <div class="ontario-overlay"></div>
+
+    <script src="../../scripts/ontario-a11y.js"></script>
+    <script src="../../scripts/ontario-header.js"></script>
+    <script src="../../scripts/ontario-search.js"></script>
+    <script>
+        addSearchResetOnClickListener("ontario-search-reset", "ontario-search-input-field");
+        addResetButtonOnSearchInputListener("ontario-search-reset", "ontario-search-input-field");
+    </script>
+    <!-- end documentation-only, below div should be removed, it is only used for documentation purposes -->
+</div>
+
