@@ -4,7 +4,7 @@ import { t } from '../../utils/i18n';
 
 export function AppHeader() {
   const { language, toggleLanguage } = useLanguage();
-  const { viewMode, setViewMode } = useMap();
+  const { viewMode } = useMap();
 
   return (
     <div className="ontario-header__container ontario-application-header">
@@ -31,7 +31,7 @@ export function AppHeader() {
           <div className="ontario-row">
             <div className="ontario-columns ontario-small-12 ontario-application-subheader__container">
               <p className="ontario-application-subheader__heading">
-                <a href="#" onClick={(e) => { e.preventDefault(); setViewMode('locator'); }}>
+                <a href="#list">
                   {t('appTitle', language)}
                 </a>
               </p>
@@ -39,7 +39,7 @@ export function AppHeader() {
                 <ul className="ontario-application-subheader__menu ontario-show-for-large">
                   <li>
                     <a
-                      href="#"
+                      href="#list"
                       className={viewMode === 'locator' ? 'active' : ''}
                     >
                       {t('findYourPHU', language)}
