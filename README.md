@@ -6,7 +6,7 @@ This prototype was built during a live coding session on March 9, 2026 with the 
 
 For this project we started with three data files the ontario_public_health_units.json scraped from phdapps.health.gov.on.ca. From that file we derived tow more files (Ontario_municipalities_EN.json and Ontario_municipalities_FR.json). [Data folder](./src/data) 
 
-The remaning required data and inputs (map boundaries/shape data, the ontario design system, the FSA file) were created during the build process. 
+The remaning required data and inputs (map boundaries/shape data, the ontario design system, the FSA file) were aquired and built during the build process. 
 
 ## Features
 
