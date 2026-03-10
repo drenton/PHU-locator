@@ -46,10 +46,7 @@ function LocatorView() {
       return phus.filter((p) => p.id === selectedPHUId);
     }
     if (selectedRegion) {
-      filtered = filtered.filter((p) => {
-        const region = language === 'fr' ? p.region_fr : p.region_en;
-        return region === selectedRegion;
-      });
+      filtered = filtered.filter((p) => p.region_en === selectedRegion);
     }
     return filtered;
   }, [phus, selectedPHUId, selectedRegion, language]);
