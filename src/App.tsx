@@ -5,6 +5,7 @@ import { PHUCardList } from './components/cards/PHUCardList';
 import { PHUCard } from './components/cards/PHUCard';
 import { PHUMap } from './components/map/PHUMap';
 import { PHUDirectory } from './components/directory/PHUDirectory';
+import { RegionFilter } from './components/directory/RegionFilter';
 import { MapProvider, useMap } from './context/MapContext';
 import { useLanguage } from './context/LanguageContext';
 import { usePHUs } from './context/PHUContext';
@@ -19,7 +20,7 @@ import './styles/search.css';
 function LocatorView() {
   const { language } = useLanguage();
   const { phus, isLoading: phusLoading } = usePHUs();
-  const { selectedPHUId, hoveredPHUId, resultView, setSelectedPHU, setHoveredPHU, setResultView } = useMap();
+  const { selectedPHUId, hoveredPHUId, resultView, selectedRegion, setSelectedPHU, setHoveredPHU, setResultView, setSelectedRegion } = useMap();
   const { geojson, boundaryToData } = useBoundaryData(phus);
 
   const onSelectPHU = useCallback((id: number) => {
@@ -40,11 +41,18 @@ function LocatorView() {
   } = useSearch(phus, language, geojson, boundaryToData, onSelectPHU);
 
   const filteredPHUs = useMemo(() => {
+    let filtered = phus;
     if (selectedPHUId !== null) {
       return phus.filter((p) => p.id === selectedPHUId);
     }
-    return phus;
-  }, [phus, selectedPHUId]);
+    if (selectedRegion) {
+      filtered = filtered.filter((p) => {
+        const region = language === 'fr' ? p.region_fr : p.region_en;
+        return region === selectedRegion;
+      });
+    }
+    return filtered;
+  }, [phus, selectedPHUId, selectedRegion, language]);
 
   const handleClear = () => {
     clearSearch();
@@ -126,6 +134,14 @@ function LocatorView() {
         <div className="phu-results">
           <div className="ontario-row">
             <div className="ontario-columns ontario-small-12">
+              {selectedPHUId === null && (
+                <RegionFilter
+                  phus={phus}
+                  lang={language}
+                  selectedRegion={selectedRegion}
+                  onSelectRegion={setSelectedRegion}
+                />
+              )}
               <PHUCardList
                 filteredPHUs={filteredPHUs}
                 lang={language}
