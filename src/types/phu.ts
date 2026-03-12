@@ -22,8 +22,14 @@ export interface PHULocatorData {
   moh: string;
   address: string;
   phone: string;
+  phone_alt?: string;
+  toll_free?: string;
   fax: string;
+  fax_animal_exposure?: string;
   after_hours: string;
+  after_hours_alt?: string;
+  after_hours_toll_free?: string;
+  after_hours_note?: string;
 }
 
 export interface RawPHU {
@@ -57,9 +63,14 @@ export interface NormalizedPHU {
   region_en: string;
   region_fr: string;
   phone: string;
+  phone_alt: string;
   toll_free: string;
   fax: string;
+  fax_animal_exposure: string;
   after_hours: string;
+  after_hours_alt: string;
+  after_hours_toll_free: string;
+  after_hours_note: string;
   website: string;
   moh: string;
   address_en: string;

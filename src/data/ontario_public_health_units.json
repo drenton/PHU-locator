@@ -632,9 +632,11 @@
         "phu_website_url": "http://www.hnhu.org",
         "moh": "Dr. Jason Malenfant",
         "address": "185 Robinson Street Simcoe, ON N3Y 5L6",
-        "phone": "519-900-9600 or  905-798-9060",
+        "phone": "519-900-9600",
         "fax": "519-805-3269",
-        "after_hours": "519-900-9600 or  905-798-9060"
+        "after_hours": "519-900-9600",
+        "phone_alt": "905-798-9060",
+        "after_hours_alt": "905-798-9060"
       },
       "municipalities_served": [
         "Caledonia",
@@ -736,9 +738,12 @@
         "phu_website_url": "http://www.publichealthgreybruce.on.ca",
         "moh": "Dr. Ian Arra",
         "address": "101 17th Street East Owen Sound, ON N4K 0A5",
-        "phone": "519-376-9420; 1-800-263-3456",
-        "fax": "519-376-4152 (Infectious Disease)\n519-376-0980 (Animal Exposure Reports)",
-        "after_hours": "519-376-5420"
+        "phone": "519-376-9420",
+        "fax": "519-376-4152",
+        "after_hours": "519-376-5420",
+        "toll_free": "1-800-263-3456",
+        "fax_infectious_disease": "519-376-4152",
+        "fax_animal_exposure": "519-376-0980"
       },
       "municipalities_served": [
         "Allenford",
@@ -1094,7 +1099,8 @@
         "address": "Jackson Square 185 King St Peterborough, ON K9J 2R8",
         "phone": "705-743-1000",
         "fax": "705-743-2897",
-        "after_hours": "705-760-8127 answering service"
+        "after_hours": "705-760-8127",
+        "after_hours_note": "Answering service"
       },
       "municipalities_served": [
         "Apsley",
@@ -1272,7 +1278,7 @@
         "phu_website_url": "http://www.hamilton.ca/publichealth",
         "moh": "Dr. Elizabeth Richardson",
         "address": "110 King St. West, 2nd Floor Hamilton, ON L8P 4S6",
-        "phone": "905-546-CITY (2489)",
+        "phone": "905-546-2489",
         "fax": "905-546-4074",
         "after_hours": "905-546-2424"
       },
@@ -1354,8 +1360,9 @@
         "moh": "Dr. Miriam Klassen",
         "address": "653 West Gore Street Stratford, ON N5A 1L4",
         "phone": "888-221-2133",
-        "fax": "519-271-2195; 1-833-482-7820 (Animal Exposure Reports)",
-        "after_hours": "1-800-431-2054"
+        "fax": "519-271-2195",
+        "after_hours": "1-800-431-2054",
+        "fax_animal_exposure": "1-833-482-7820"
       },
       "municipalities_served": [
         "Ashfield-Colborne-Wawanosh",
@@ -1646,7 +1653,8 @@
         "address": "355 Wellington Street, Suite 110 London, ON N6A 3N7",
         "phone": "519-663-5317",
         "fax": "519-663-9581",
-        "after_hours": "519-663-5317 Option 2"
+        "after_hours": "519-663-5317",
+        "after_hours_note": "Option 2"
       },
       "municipalities_served": [
         "Adelaide-Metcalfe",
@@ -1756,7 +1764,8 @@
         "address": "1815 Sir Isaac Brock Way P.O. Box 1052, Station Main Thorold, ON L2V 0A2",
         "phone": "905-688-3762",
         "fax": "905-682-3901",
-        "after_hours": "905-984-3690 or 877-552-5579"
+        "after_hours": "905-984-3690",
+        "after_hours_toll_free": "877-552-5579"
       },
       "municipalities_served": [
         "Allanburg",
@@ -2037,7 +2046,8 @@
         "address": "169 Pine Street South P.O. Bag 2012 Timmins, ON P4N 8B7",
         "phone": "705-267-1181",
         "fax": "705-264-3980",
-        "after_hours": "705-267-1181/1-800-461-1818"
+        "after_hours": "705-267-1181",
+        "after_hours_toll_free": "1-800-461-1818"
       },
       "municipalities_served": [
         "Albany",
@@ -2173,7 +2183,8 @@
         "address": "169 Pine Street South P.O. Bag 2012 Timmins, ON P4N 8B7",
         "phone": "705-267-1181",
         "fax": "705-647-5779",
-        "after_hours": "705-267-1181/1-800-461-1818"
+        "after_hours": "705-267-1181",
+        "after_hours_toll_free": "1-800-461-1818"
       },
       "municipalities_served": [
         "Beaverhouse",
@@ -2531,7 +2542,8 @@
         "address": "100 Constellation Drive Ottawa, ON K2G 6J8",
         "phone": "613-580-6744",
         "fax": "613-580-9641",
-        "after_hours": "3-1-1 Call Centre"
+        "after_hours": "311",
+        "after_hours_note": "Call Centre"
       },
       "municipalities_served": [
         "Ashton",
@@ -2634,7 +2646,8 @@
         "address": "7120 Hurontario Street Mississauga, ON L5W 1N4",
         "phone": "905-799-7700",
         "fax": "905-565-9602",
-        "after_hours": "905-791-7800 press \"0\""
+        "after_hours": "905-791-7800",
+        "after_hours_note": "Press 0"
       },
       "municipalities_served": [
         "Alton",
@@ -3076,9 +3089,10 @@
         "phu_website_url": "http://www.kflaph.ca",
         "moh": "Dr. Piotr Oglaza",
         "address": "221 Portsmouth Avenue Kingston, ON K7M 1V5",
-        "phone": "613-549-1232 or toll free 1-800-267-7875",
+        "phone": "613-549-1232",
         "fax": "613-549-0349",
-        "after_hours": "613-507-3100"
+        "after_hours": "613-507-3100",
+        "toll_free": "1-800-267-7875"
       },
       "municipalities_served": [
         "Addington Highlands",
@@ -3226,9 +3240,11 @@
         "phu_website_url": "http://www.healthunit.org",
         "moh": "Dr. Piotr Oglaza",
         "address": "458 Laurier Boulevard Brockville, ON K6V 7A3",
-        "phone": "613-345-5685 or toll-free 1-800-660-5853",
+        "phone": "613-345-5685",
         "fax": "613-345-5777",
-        "after_hours": "613-345-5685 or toll free -1-800-660-5853"
+        "after_hours": "613-345-5685",
+        "toll_free": "1-800-660-5853",
+        "after_hours_toll_free": "1-800-660-5853"
       },
       "municipalities_served": [
         "Addison",
@@ -3372,9 +3388,11 @@
         "phu_website_url": "http://www.hpepublichealth.ca/",
         "moh": "Dr. Piotr Oglaza",
         "address": "179 North Park Street Belleville, ON K8P 4P1",
-        "phone": "613-966-5500 or toll free 1-800-267-2803",
+        "phone": "613-966-5500",
         "fax": "613-966-1813",
-        "after_hours": "613-966-5500 or toll free 1-800-267-2803"
+        "after_hours": "613-966-5500",
+        "toll_free": "1-800-267-2803",
+        "after_hours_toll_free": "1-800-267-2803"
       },
       "municipalities_served": [
         "Ameliasburg",
@@ -3680,7 +3698,8 @@
         "address": "1300 Paris Street Sudbury, ON P3E 3A3",
         "phone": "705-522-9200",
         "fax": "705-522-5182",
-        "after_hours": "705-688-4366 or 1-866-522-9200"
+        "after_hours": "705-688-4366",
+        "after_hours_toll_free": "1-866-522-9200"
       },
       "municipalities_served": [
         "Alban",

@@ -29,6 +29,9 @@ export function PHUCard({ phu, lang, isSelected, onSelect }: PHUCardProps) {
   const addressLines = address ? formatAddress(address) : [];
   const region = lang === 'fr' ? phu.region_fr : phu.region_en;
 
+  // If after-hours is same as phone, show "All hours" note instead of duplicating
+  const afterHoursSameAsPhone = phu.after_hours && phu.after_hours === phu.phone;
+
   return (
     <div
       className={`phu-card ${isSelected ? 'phu-card--selected' : ''}`}
@@ -46,10 +49,17 @@ export function PHUCard({ phu, lang, isSelected, onSelect }: PHUCardProps) {
       <div className="phu-card__contact">
         {phu.phone && (
           <div className="phu-card__field phu-card__field--phone">
-            <span className="phu-card__label">{t('phone', lang)}</span>
-            <a href={`tel:${phu.phone.replace(/[^\d+]/g, '')}`} className="phu-card__phone-link">
-              {phu.phone}
-            </a>
+            <span className="phu-card__label">{t('phone', lang)}{afterHoursSameAsPhone && <span className="phu-card__note"> — {t('allHours', lang)}</span>}</span>
+            <div className="phu-card__numbers">
+              <a href={`tel:${phu.phone.replace(/[^\d+]/g, '')}`} className="phu-card__phone-link">
+                {phu.phone}
+              </a>
+              {phu.phone_alt && (
+                <a href={`tel:${phu.phone_alt.replace(/[^\d+]/g, '')}`} className="phu-card__phone-link">
+                  {phu.phone_alt}
+                </a>
+              )}
+            </div>
           </div>
         )}
 
@@ -60,10 +70,21 @@ export function PHUCard({ phu, lang, isSelected, onSelect }: PHUCardProps) {
           </div>
         )}
 
-        {phu.after_hours && (
+        {!afterHoursSameAsPhone && phu.after_hours && (
           <div className="phu-card__field phu-card__field--after-hours">
             <span className="phu-card__label">{t('afterHours', lang)}</span>
-            <a href={`tel:${phu.after_hours.replace(/[^\d+]/g, '')}`}>{phu.after_hours}</a>
+            <div className="phu-card__numbers">
+              <span>
+                <a href={`tel:${phu.after_hours.replace(/[^\d+]/g, '')}`}>{phu.after_hours}</a>
+                {phu.after_hours_note && <span className="phu-card__note"> ({phu.after_hours_note})</span>}
+              </span>
+              {phu.after_hours_alt && (
+                <a href={`tel:${phu.after_hours_alt.replace(/[^\d+]/g, '')}`}>{phu.after_hours_alt}</a>
+              )}
+              {phu.after_hours_toll_free && (
+                <a href={`tel:${phu.after_hours_toll_free.replace(/[^\d+]/g, '')}`}>{phu.after_hours_toll_free}</a>
+              )}
+            </div>
           </div>
         )}
 
@@ -91,6 +112,13 @@ export function PHUCard({ phu, lang, isSelected, onSelect }: PHUCardProps) {
           <div className="phu-card__field phu-card__field--secondary">
             <span className="phu-card__label">{t('fax', lang)}</span>
             <span>{phu.fax}</span>
+          </div>
+        )}
+
+        {phu.fax_animal_exposure && (
+          <div className="phu-card__field phu-card__field--secondary">
+            <span className="phu-card__label">{t('faxAnimalExposure', lang)}</span>
+            <span>{phu.fax_animal_exposure}</span>
           </div>
         )}
 

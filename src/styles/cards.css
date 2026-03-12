@@ -86,6 +86,16 @@
   color: #4d4d4d;
 }
 
+.phu-card__numbers {
+  display: flex;
+  flex-direction: column;
+}
+
+.phu-card__note {
+  color: #666;
+  font-size: 0.875rem;
+}
+
 .phu-card__field--secondary {
   color: #555;
 }
