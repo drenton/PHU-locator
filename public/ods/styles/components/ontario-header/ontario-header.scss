@@ -1,0 +1,505 @@
+@use 'sass:math';
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/fonts.variables' as fonts;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/z-index.variables' as zIndex;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/placeholder/focus.placeholders' as placeholders;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/line-heights.variables' as lineheight;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-sizes.variables' as fontSizes;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-weights.variables' as fontWeights;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+
+$ontario-search-input-padding: 7.2rem;
+$ontario-search-input-padding--mobile: 6.4rem;
+
+$ontario-header-logo-width: globalFunctions.px-to-rem(180);
+$ontario-header-logo-width--mobile: globalFunctions.px-to-rem(45);
+
+:root {
+	--header-search-reset: url(../icons/svg/ontario-icon-close.svg);
+}
+
+.ontario-header {
+	position: relative;
+	overflow: hidden;
+	z-index: 5;
+	background-color: colours.$ontario-colour-black;
+	color: colours.$ontario-colour-white;
+	display: flex;
+	align-items: center;
+	height: 5.75rem;
+
+	.ontario-row {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	svg {
+		width: spacing.$spacing-6;
+		height: spacing.$spacing-6;
+		margin-bottom: spacing.$spacing-0;
+	}
+}
+
+.ontario-header__logo-container {
+	height: globalVariables.$ontario-logo-height;
+}
+
+.ontario-header__logo-container a {
+	display: inline-block;
+	height: 100%;
+
+	&:focus {
+		box-shadow: 0 0 0 globalVariables.$global-radius colours.$ontario-colour-focus;
+	}
+}
+
+.ontario-header__logo-container {
+	img {
+		width: $ontario-header-logo-width--mobile;
+		height: globalVariables.$ontario-logo-height;
+
+		@media screen and (min-width: breakpoints.$small-breakpoint) {
+			width: $ontario-header-logo-width;
+			height: globalVariables.$ontario-logo-height;
+		}
+	}
+}
+
+/* Header search styles */
+.ontario-header__search-container {
+	position: relative;
+	display: none;
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		display: flex;
+	}
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		padding-right: math.div(2rem, 2);
+	}
+}
+
+.ontario-header__search-input.ontario-input {
+	border-width: 0;
+	margin-bottom: spacing.$spacing-0;
+	height: globalVariables.$standard-input-height;
+	padding-left: spacing.$spacing-4;
+	padding-right: $ontario-search-input-padding;
+
+	&:invalid + input[type='reset'] {
+		display: none;
+	}
+
+	&:focus {
+		& ~ .ontario-header__search-submit {
+			background-color: colours.$ontario-colour-link;
+			color: colours.$ontario-colour-white;
+
+			&:hover {
+				background-color: colours.$ontario-colour-link--hover;
+				color: colours.$ontario-colour-white;
+			}
+		}
+	}
+
+	// Remove auto X icon for IE and Edge on input area
+	&::-ms-clear {
+		display: none;
+		width: 0;
+		height: 0;
+	}
+
+	// Remove red outline around input area on Firefox
+	&:invalid:focus {
+		box-shadow: 0 0 0 4px colours.$ontario-colour-focus;
+		-moz-box-shadow: none;
+	}
+
+	&:invalid:not(:focus) {
+		box-shadow: none;
+		-moz-box-shadow: none;
+	}
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) and (max-width: breakpoints.$medium-breakpoint) {
+		padding-right: $ontario-search-input-padding--mobile;
+	}
+}
+
+.ontario-header__search-submit {
+	border: 0;
+	border-radius: 0 3px 3px 0;
+	background-color: colours.$ontario-greyscale-5;
+	color: colours.$ontario-colour-black;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-family: 'Open Sans', sans-serif;
+	font-weight: fontWeights.$ontario-font-weights-semi-bold;
+	font-size: 1.125rem;
+	height: 100%;
+	line-height: lineheight.$ontario-line-height-8;
+
+	position: absolute;
+	right: spacing.$spacing-4;
+	top: spacing.$spacing-0;
+	cursor: pointer;
+
+	padding-left: spacing.$spacing-4;
+	padding-right: spacing.$spacing-4;
+
+	&:hover {
+		background-color: colours.$ontario-colour-link--hover;
+		color: colours.$ontario-colour-white;
+	}
+
+	&:focus {
+		outline: none;
+		box-shadow: 0 0 0 globalVariables.$global-radius colours.$ontario-colour-focus;
+		background-color: colours.$ontario-colour-link--hover;
+		color: colours.$ontario-colour-white;
+	}
+
+	&:active {
+		background-color: colours.$ontario-colour-link--active;
+		color: colours.$ontario-colour-white;
+	}
+
+	svg {
+		margin-right: spacing.$spacing-0;
+	}
+
+	@media screen and (max-width: breakpoints.$medium-breakpoint) {
+		padding-left: spacing.$spacing-3;
+		padding-right: spacing.$spacing-3;
+	}
+}
+
+input[type='reset'].ontario-header__search-reset {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	top: globalFunctions.px-to-rem(11);
+	right: globalFunctions.px-to-rem(88);
+	height: globalFunctions.px-to-rem(28);
+	width: globalFunctions.px-to-rem(28);
+	color: black;
+	margin: spacing.$spacing-0;
+	padding: spacing.$spacing-2;
+
+	background-image: var(--header-search-reset);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	cursor: pointer;
+
+	&:focus {
+		box-shadow: 0 0 0 globalVariables.$global-radius colours.$ontario-colour-focus;
+	}
+
+	@media screen and (max-width: breakpoints.$medium-breakpoint) {
+		right: globalFunctions.px-to-rem(80);
+	}
+}
+
+/* Header menu & language toggle & close search button styles */
+.ontario-header__nav-right-container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: spacing.$spacing-4;
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		gap: spacing.$spacing-0;
+	}
+}
+
+/* Header buttons */
+.ontario-header-button {
+	background-color: colours.$ontario-colour-black;
+	border: none;
+	border-radius: globalVariables.$global-radius;
+	box-sizing: border-box;
+	box-shadow: none;
+	color: colours.$ontario-colour-white;
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+
+	font-size: 1.125rem;
+	font-weight: fontWeights.$ontario-font-weights-semi-bold;
+	font-family: fonts.$ontario-font-open-sans;
+	height: globalVariables.$standard-input-height;
+	line-height: math.div(14, 9);
+	text-align: center;
+	text-decoration: none;
+
+	&:focus {
+		@extend %ontario-focus;
+	}
+
+	&:hover,
+	&:focus,
+	&:visited {
+		color: colours.$ontario-colour-white;
+	}
+}
+
+.ontario-header-button--with-outline,
+.ontario-header-button--without-outline {
+	background-color: colours.$ontario-colour-black;
+	color: colours.$ontario-colour-white;
+
+	&:hover {
+		background-color: colours.$ontario-greyscale-70;
+	}
+
+	&:active {
+		background-color: colours.$ontario-greyscale-60;
+	}
+
+	&:focus {
+		background-color: colours.$ontario-greyscale-70;
+	}
+}
+
+.ontario-header-button--with-outline {
+	border: globalFunctions.px-to-rem(2) solid colours.$ontario-colour-white;
+	margin: spacing.$spacing-0;
+	padding: math.div(spacing.$spacing-3, 2) spacing.$spacing-4;
+
+	&:hover {
+		border: globalFunctions.px-to-rem(2) solid colours.$ontario-colour-white;
+		color: colours.$ontario-colour-white;
+	}
+
+	&:focus {
+		background-color: colours.$ontario-greyscale-70;
+	}
+
+	@media screen and (max-width: breakpoints.$xsmall-breakpoint) {
+		padding: math.div(spacing.$spacing-3, 2);
+	}
+}
+
+.ontario-header-button--without-outline {
+	&:focus {
+		background-color: colours.$ontario-greyscale-70;
+	}
+}
+
+@media screen and (min-width: breakpoints.$medium-breakpoint) {
+	.ontario-header-button--desktop {
+		background-color: colours.$ontario-colour-black;
+		margin-left: spacing.$spacing-4;
+		/* padding uses !important because a more specific global or utility rule
+            (from the design-system globals) overrides this component rule in some
+            contexts (e.g. header variants). Using !important ensures the desktop
+            button gets the intended spacing without changing upstream styles. */
+		padding: spacing.$spacing-1 spacing.$spacing-1 spacing.$spacing-1 spacing.$spacing-3 !important;
+
+		svg {
+			margin-left: spacing.$spacing-1;
+			/* margin-right needs !important because the general .ontario-header__menu-toggle
+                svg rule applies later/in a more specific context and pushes a different value.
+               The important flag forces this desktop variant to take precedence. */
+			margin-right: spacing.$spacing-0 !important;
+			/* width/height use !important to override global svg sizing rules coming
+                from the shared variables or component defaults (these may be applied
+                by a higher-specificity selector or imported partial). We constrain the
+                desktop button's icon size explicitly here. */
+			width: spacing.$spacing-5 !important;
+			height: spacing.$spacing-5 !important;
+		}
+
+		&:hover,
+		&:focus {
+			background-color: colours.$ontario-greyscale-70;
+		}
+	}
+
+	.ontario-header-button--desktop.ontario-header-button--with-outline {
+		border: none;
+	}
+}
+
+.ontario-header__menu-toggle {
+	padding: math.div(spacing.$spacing-3, 2) spacing.$spacing-4;
+
+	@media screen and (max-width: breakpoints.$xsmall-breakpoint) {
+		padding-left: spacing.$spacing-2;
+		padding-right: spacing.$spacing-2;
+	}
+
+	span {
+		display: flex;
+
+		@media screen and (max-width: breakpoints.$xsmall-breakpoint) {
+			display: none;
+		}
+	}
+
+	svg {
+		margin-right: globalFunctions.px-to-rem(6);
+		width: spacing.$spacing-6;
+		height: spacing.$spacing-6;
+
+		@media screen and (max-width: breakpoints.$xsmall-breakpoint) {
+			margin-right: spacing.$spacing-0;
+		}
+	}
+}
+
+.ontario-header__language-toggler {
+	padding: spacing.$spacing-1 spacing.$spacing-3;
+
+	abbr[title] {
+		text-decoration: none;
+	}
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		background-color: colours.$ontario-colour-black;
+
+		&:hover,
+		&:focus {
+			background-color: colours.$ontario-greyscale-70;
+		}
+	}
+}
+
+.ontario-header__search-toggler {
+	padding: spacing.$spacing-2 spacing.$spacing-3;
+
+	svg {
+		@media screen and (min-width: breakpoints.$small-breakpoint) {
+			margin-right: globalFunctions.px-to-rem(4);
+		}
+	}
+}
+
+.ontario-header__search-close {
+	flex-direction: column-reverse;
+	font-weight: fontWeights.$ontario-font-weights-normal;
+	margin-right: spacing.$spacing-4;
+	padding: math.div(spacing.$spacing-5, 10) spacing.$spacing-1;
+	position: relative;
+	height: globalFunctions.px-to-rem(60);
+	display: none;
+
+	span {
+		position: relative;
+		top: -3px;
+		font-size: fontSizes.$ontario-font-size-standard-body-text;
+		margin-left: spacing.$spacing-0;
+
+		@media screen and (min-width: 39.9375em) {
+			margin-right: globalFunctions.px-to-rem(4);
+		}
+
+		&:hover,
+		&:focus {
+			outline: none;
+			text-decoration: none;
+		}
+	}
+
+	svg {
+		top: 0;
+	}
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		flex-direction: row;
+		padding: spacing.$spacing-1 spacing.$spacing-2 spacing.$spacing-1 spacing.$spacing-4;
+		height: globalVariables.$standard-input-height;
+
+		span {
+			top: 0;
+		}
+
+		svg {
+			position: relative;
+			width: spacing.$spacing-7;
+			height: spacing.$spacing-7;
+		}
+	}
+}
+
+.ontario-header--search-open .ontario-header__search-close {
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		display: none;
+	}
+}
+
+.ontario-header__search-close-container {
+	display: none;
+	justify-content: flex-end;
+	padding-right: 0;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		width: auto;
+		padding-left: spacing.$spacing-0;
+		padding-right: spacing.$spacing-0;
+	}
+}
+
+@media screen and (max-width: breakpoints.$medium-breakpoint) {
+	.ontario-header--search-open .ontario-header__logo-container,
+	.ontario-header--search-open .ontario-header__nav-right-container {
+		display: none;
+	}
+
+	.ontario-header--search-open .ontario-header__search-close-container,
+	.ontario-header--search-open .ontario-header__search-container,
+	.ontario-header--search-open .ontario-header__search-close {
+		display: flex;
+	}
+}
+
+.ontario-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.6);
+	width: 100%;
+	height: 100%;
+	z-index: zIndex.$ontario-z-index-behind-high;
+}
+
+.ontario-navigation--open {
+	.ontario-overlay {
+		display: block;
+
+		@media screen and (min-width: breakpoints.$medium-breakpoint) {
+			display: none;
+		}
+	}
+}
+
+.ontario-mobile-navigation--open {
+	.ontario-overlay {
+		display: block;
+	}
+}
+
+.ontario-navigation--open .ontario-navigation .ontario-header-button {
+	visibility: visible;
+}
+
+#ontario-search-reset {
+	display: none;
+}
+
+@media screen and (min-width: breakpoints.$medium-breakpoint) {
+	.ontario-icon--rotated {
+		transform: rotate(180deg);
+	}
+}

@@ -1,0 +1,117 @@
+@use 'sass:math';
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/typography.variables' as typography;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/z-index.variables' as zIndex;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-sizes.variables' as fontSizes;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+
+$ontario-touch-target-size: globalFunctions.px-to-rem(36);
+$ontario-touch-target-size-mobile: globalFunctions.px-to-rem(40);
+$ontario-radios-size: globalFunctions.px-to-rem(32);
+$ontario-radios-size-mobile: globalFunctions.px-to-rem(36);
+$ontario-input-offset: math.div($ontario-touch-target-size - $ontario-radios-size, 2);
+
+* .ontario-radios {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-moz-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.ontario-radios {
+	padding: 0 0 0 math.div(spacing.$spacing-1, 2);
+	margin-bottom: spacing.$spacing-7;
+	max-width: globalVariables.$standard-width;
+}
+
+.ontario-radios__item {
+	position: relative;
+	display: block;
+	margin: spacing.$spacing-0 spacing.$spacing-0 spacing.$spacing-4;
+	padding: spacing.$spacing-0 spacing.$spacing-6 spacing.$spacing-0;
+
+	&:last-of-type {
+		margin-bottom: spacing.$spacing-0;
+	}
+}
+
+.ontario-radios__input {
+	cursor: pointer;
+	margin: spacing.$spacing-0;
+	position: absolute;
+	opacity: 0;
+	top: $ontario-input-offset * -1;
+	left: $ontario-input-offset * -1;
+	width: $ontario-touch-target-size;
+	height: $ontario-touch-target-size;
+	z-index: zIndex.$ontario-z-index-above-low;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		width: $ontario-touch-target-size-mobile;
+		height: $ontario-touch-target-size-mobile;
+		top: $ontario-input-offset * -0.75;
+		left: $ontario-input-offset * -0.75;
+	}
+}
+
+.ontario-radios__label {
+	display: inline-block;
+	font-size: fontSizes.$ontario-font-size-standard-body-text;
+	margin: 0.2rem spacing.$spacing-0;
+	padding: spacing.$spacing-0 spacing.$spacing-3;
+	// remove 300ms pause on mobile
+	touch-action: manipulation;
+	white-space: normal;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		margin: 0.3rem spacing.$spacing-0;
+		padding: 0 1rem;
+	}
+
+	&:before {
+		content: '';
+		border: globalFunctions.px-to-rem(2) solid colours.$ontario-colour-black;
+		border-radius: 50%;
+		box-sizing: border-box;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: $ontario-radios-size;
+		height: $ontario-radios-size;
+		transition: border 0.1s ease-in-out;
+		background: colours.$ontario-colour-white;
+
+		@media screen and (max-width: breakpoints.$small-breakpoint) {
+			width: $ontario-radios-size-mobile;
+			height: $ontario-radios-size-mobile;
+		}
+	}
+
+	&:after {
+		content: '';
+		border-radius: 50%;
+		border: globalFunctions.px-to-rem(10) solid colours.$ontario-colour-black;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: translate($ontario-input-offset * 3, $ontario-input-offset * 3);
+		opacity: 0;
+
+		@media screen and (max-width: breakpoints.$small-breakpoint) {
+			border: globalFunctions.px-to-rem(12) solid colours.$ontario-colour-black;
+		}
+	}
+}
+
+.ontario-radios__input:focus + .ontario-radios__label:before {
+	-moz-box-shadow: 0 0 0 4px colours.$ontario-colour-focus;
+	-webkit-box-shadow: colours.$ontario-colour-focus;
+	box-shadow: 0 0 0 4px colours.$ontario-colour-focus;
+	outline: globalFunctions.px-to-rem(4) solid transparent;
+	transition: box-shadow 0.1s ease-in-out;
+}
+
+.ontario-radios__input:checked + .ontario-radios__label:after {
+	opacity: 1;
+}

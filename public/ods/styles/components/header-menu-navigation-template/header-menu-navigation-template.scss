@@ -1,0 +1,178 @@
+@use 'sass:math';
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/typography.variables' as typography;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/z-index.variables' as zIndex;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/mixins/global.mixins' as globalMixins;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/placeholder/focus.placeholders' as placeholders;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-weights.variables' as fontWeights;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+
+$header-close-button--top-value: -4.35rem;
+$service-header-close-button--top-value: -4.85rem;
+$service-header-close-button--top-value-mobile: -4.6rem;
+$service-header-close-button--top-value-xs-mobile: -5.5rem;
+
+.ontario-navigation {
+	position: absolute;
+	width: 100%;
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		position: relative;
+		max-width: 72rem;
+		width: auto;
+		margin: spacing.$spacing-0 auto;
+	}
+
+	.ontario-header-button {
+		visibility: hidden;
+		position: absolute;
+		right: spacing.$spacing-4;
+		z-index: zIndex.$ontario-z-index-above-high;
+		background-color: colours.$ontario-greyscale-70;
+
+		.ontario-icon {
+			width: 2rem;
+			height: 2rem;
+			margin-bottom: spacing.$spacing-0;
+		}
+
+		&:hover {
+			background-color: colours.$ontario-greyscale-60;
+		}
+
+		&:active {
+			background-color: colours.$ontario-colour-black;
+		}
+	}
+}
+
+.ontario-navigation__container {
+	background: colours.$ontario-colour-white;
+	position: absolute;
+	transform: translateY(-100%);
+	transition: transform 0.3s ease-in-out, visibility 0.1s ease;
+	width: 100%;
+	visibility: hidden;
+	z-index: zIndex.$ontario-z-index-above-high;
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		border-radius: globalVariables.$global-radius;
+		display: none;
+		right: spacing.$spacing-4;
+		top: calc(100% - #{spacing.$spacing-2});
+		transition: none;
+		min-width: globalFunctions.px-to-rem(290);
+		max-width: 30%;
+		z-index: 5;
+	}
+
+	ul {
+		list-style: none;
+		padding: spacing.$spacing-2 0;
+		margin: spacing.$spacing-0;
+		border-bottom: globalFunctions.px-to-rem(1) solid colours.$ontario-greyscale-20;
+
+		@media screen and (min-width: breakpoints.$medium-breakpoint) {
+			border-bottom: none;
+		}
+	}
+
+	li {
+		border-top: globalFunctions.px-to-rem(1) solid colours.$ontario-greyscale-20;
+		padding: spacing.$spacing-0;
+
+		&:last-of-type {
+			border-bottom: globalFunctions.px-to-rem(1) solid colours.$ontario-greyscale-20;
+		}
+
+		&.ontario-link--active {
+			border-left: globalFunctions.px-to-rem(6) solid colours.$ontario-colour-black;
+			background-color: colours.$ontario-greyscale-5;
+		}
+	}
+
+	a {
+		color: colours.$ontario-colour-black;
+		display: block;
+		font-size: 1.125rem;
+		font-weight: fontWeights.$ontario-font-weights-semi-bold;
+		text-decoration: none;
+		padding: spacing.$spacing-3 spacing.$spacing-5;
+
+		&:hover {
+			background-color: darken(colours.$ontario-greyscale-5, 5);
+
+			.ontario-header-navigation__menu-item-label {
+				text-decoration: underline;
+			}
+		}
+
+		&:active {
+			background-color: colours.$ontario-greyscale-20;
+		}
+
+		&:focus {
+			box-shadow: 0 0 0 4px colours.$ontario-colour-focus inset;
+		}
+
+		&:visited {
+			color: colours.$ontario-colour-black;
+		}
+
+		@media screen and (max-width: breakpoints.$medium-breakpoint) {
+			padding: (spacing.$spacing-3 - math.div(spacing.$spacing-1, 3.25)) spacing.$spacing-6;
+		}
+	}
+}
+
+.ontario-navigation.ontario-navigation--open .ontario-navigation__container {
+	visibility: visible;
+	transform: translateY(0);
+	transition: transform 0.4s ease-in-out;
+
+	@media screen and (min-width: breakpoints.$medium-breakpoint) {
+		transition: none;
+		display: block;
+	}
+}
+
+.ontario-header + .ontario-navigation .ontario-header-button {
+	top: $header-close-button--top-value;
+}
+
+.ontario-application-header + .ontario-application-subheader-menu__container .ontario-header-button {
+	top: ((spacing.$spacing-9 * -1) + (spacing.$spacing-1 * -1));
+}
+
+.ontario-service-header + .ontario-service-subheader-menu__container .ontario-header-button {
+	top: $service-header-close-button--top-value-mobile;
+	background-color: colours.$ontario-colour-service-ontario-header-brand;
+
+	&:hover {
+		background-color: colours.$ontario-colour-service-ontario-header-hover;
+	}
+
+	&:active {
+		background-color: colours.$ontario-colour-service-ontario-header-active;
+	}
+
+	&:focus {
+		box-shadow: 0 0 0 4px colours.$ontario-colour-service-ontario-header-focus;
+	}
+
+	@media screen and (max-width: breakpoints.$xsmall-breakpoint) {
+		top: $service-header-close-button--top-value-xs-mobile;
+	}
+
+	@media screen and (min-width: breakpoints.$small-breakpoint) {
+		top: $service-header-close-button--top-value;
+	}
+}
+
+.ontario-header__menu-toggle--is-open {
+	background-color: colours.$ontario-greyscale-70;
+}

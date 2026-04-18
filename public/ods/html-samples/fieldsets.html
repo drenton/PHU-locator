@@ -1,0 +1,47 @@
+
+
+<div class="ontario-form-group">
+    <fieldset class="ontario-fieldset" >
+        <legend class="ontario-fieldset__legend ontario-fieldset__legend--large">
+What is your delivery address?
+        </legend>
+                <label class="ontario-label" for="address-line-1">
+                    Address line 1<span class="ontario-label__flag">(required)</span>
+                </label>
+                    <p id="address-line-1-hint" class="ontario-hint">Street and number or P.O. box.</p>
+                <input required aria-describedby="address-line-1-hint" class="ontario-input" type="text" id="address-line-1">
+                <label class="ontario-label" for="address-line-2">
+                    Address line 2<span class="ontario-label__flag">(optional)</span>
+                </label>
+                    <p id="address-line-2-hint" class="ontario-hint">Apartment, suite, unit, building, etc.</p>
+                <input  aria-describedby="address-line-2-hint" class="ontario-input" type="text" id="address-line-2">
+                <label class="ontario-label" for="city-town">
+                    City/town<span class="ontario-label__flag">(required)</span>
+                </label>
+                <input required  class="ontario-input" type="text" id="city-town">
+                <label class="ontario-label" for="province">
+                    Province<span class="ontario-label__flag">(required)</span>
+                </label>
+                <select required class="ontario-input ontario-dropdown" id="province" name="province">
+                        <option value="">Select</option>
+                        <option value="AB">Alberta</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="MB">Manitoba</option>
+                        <option value="NB">New Brunswick</option>
+                        <option value="NL">Newfoundland and Labrador</option>
+                        <option value="NS">Nova Scotia</option>
+                        <option value="ON">Ontario</option>
+                        <option value="PE">Prince Edward Island</option>
+                        <option value="QC">Quebec</option>
+                        <option value="SK">Saskatchewan</option>
+                        <option value="NT">Northwest Territories</option>
+                        <option value="NU">Nunavut</option>
+                        <option value="YT">Yukon</option>
+                </select>
+                <label class="ontario-label" for="postal-code">
+                    Postal code<span class="ontario-label__flag">(required)</span>
+                </label>
+                <input required  class="ontario-input ontario-input--7-char-width" type="text" id="postal-code">
+    </fieldset>
+</div>
+

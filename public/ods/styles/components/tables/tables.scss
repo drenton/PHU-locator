@@ -1,0 +1,397 @@
+@use 'sass:color';
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/breakpoints.variables' as breakpoints;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/typography.variables' as typography;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/2-tools/functions/global.functions' as globalFunctions;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/font-weights.variables' as fontWeights;
+
+$ontario-table-caption-background: #0000001a;
+$ontario-table-total: #0077a056;
+$ontario-table-subtotal: #007b9e1d;
+$ontario-table-highlight: #e191003c;
+$ontario-table-row-divider: #0000004d;
+$ontario-table-zebra-striping: #0000000d;
+$ontario-table-shadow--cover: rgba(255, 255, 255, 0);
+$ontario-table-shadow--black: rgba(0, 0, 0, 0.2);
+$ontario-table-shadow--clear: rgba(252, 0, 0, 0);
+$ontario-table-scroller--height: 20px;
+
+$ontario-remcalc-8px: globalFunctions.px-to-rem(8);
+$ontario-remcalc-12px: globalFunctions.px-to-rem(12);
+$ontario-remcalc-14px: globalFunctions.px-to-rem(14);
+$ontario-remcalc-16px: globalFunctions.px-to-rem(16);
+$ontario-remcalc-17px: globalFunctions.px-to-rem(17);
+$ontario-remcalc-18px: globalFunctions.px-to-rem(18);
+$ontario-remcalc-19px: globalFunctions.px-to-rem(19);
+$ontario-remcalc-20px: globalFunctions.px-to-rem(20);
+$ontario-remcalc-23px: globalFunctions.px-to-rem(23);
+$ontario-remcalc-24px: globalFunctions.px-to-rem(24);
+$ontario-remcalc-28px: globalFunctions.px-to-rem(28);
+$ontario-remcalc-24-5px: globalFunctions.px-to-rem(24.5);
+$ontario-remcalc-40px: globalFunctions.px-to-rem(40);
+
+caption {
+	background-color: $ontario-table-caption-background;
+	padding: $ontario-remcalc-18px $ontario-remcalc-16px $ontario-remcalc-18px $ontario-remcalc-24px;
+	text-align: left;
+	font-weight: bold;
+	font-size: globalFunctions.px-to-rem(22);
+	line-height: globalFunctions.px-to-rem(35);
+
+	display: table-caption;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		font-size: $ontario-remcalc-20px;
+		line-height: globalFunctions.px-to-rem(30);
+		padding-left: $ontario-remcalc-16px;
+	}
+}
+
+.ontario-table-container {
+	position: relative;
+	margin: $ontario-remcalc-8px 0 $ontario-remcalc-40px 0; //Excludes 20px scrollbar on top and bottom
+
+	table:not(.ontario-table--no-zebra-stripes) {
+		tbody {
+			tr:first-child:nth-last-child(n + 6),
+			tr:first-child:nth-last-child(n + 6) ~ tr {
+				&:nth-child(even) {
+					background-color: $ontario-table-zebra-striping;
+				}
+			}
+		}
+	}
+}
+
+.ontario-table-div {
+	overflow-x: auto;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		overflow-x: scroll;
+	}
+
+	background: linear-gradient(to right, colours.$ontario-colour-white 30%, $ontario-table-shadow--cover),
+		linear-gradient(to right, $ontario-table-shadow--cover, colours.$ontario-colour-white 70%) 0 100%,
+		linear-gradient(to right, $ontario-table-shadow--black 0%, $ontario-table-shadow--clear 100.01%),
+		linear-gradient(to left, $ontario-table-shadow--black 0%, $ontario-table-shadow--clear 100.01%);
+	background-repeat: no-repeat;
+	background-size: $ontario-remcalc-40px 100%, $ontario-remcalc-40px 100%, $ontario-remcalc-14px 100%, $ontario-remcalc-14px 100%;
+	background-position: 0 0, 100%, 0 0, 100%;
+	background-attachment: local, local, scroll, scroll;
+}
+
+.ontario-table-scroll--wrapper {
+	height: $ontario-table-scroller--height;
+	overflow-x: auto;
+	overflow-y: hidden;
+	display: block;
+}
+
+table {
+	border-collapse: collapse;
+	font-size: $ontario-remcalc-17px;
+	display: table;
+	line-height: globalFunctions.px-to-rem(26);
+	font-weight: normal;
+
+	&.ontario-table--full-container-width {
+		display: table;
+		width: 100% !important;
+	}
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		font-size: $ontario-remcalc-16px;
+	}
+}
+
+table.ontario-table--condensed {
+	td {
+		padding: $ontario-remcalc-12px $ontario-remcalc-16px $ontario-remcalc-12px $ontario-remcalc-24px;
+		text-align: left;
+	}
+
+	td.ontario-table-cell--numeric {
+		padding: $ontario-remcalc-12px $ontario-remcalc-24px $ontario-remcalc-12px $ontario-remcalc-16px;
+		font-size: $ontario-remcalc-17px;
+		text-align: right;
+	}
+
+	tbody th,
+	tfoot th {
+		padding: $ontario-remcalc-12px $ontario-remcalc-16px $ontario-remcalc-12px $ontario-remcalc-24px;
+	}
+
+	tr.ontario-table-row--highlight th img.ontario-table--highlight-indicator {
+		top: $ontario-remcalc-17px;
+	}
+
+	tr.ontario-table-row--subtotal,
+	tfoot tr {
+		th,
+		td {
+			padding: $ontario-remcalc-16px $ontario-remcalc-16px $ontario-remcalc-16px $ontario-remcalc-24px;
+		}
+
+		td.ontario-table-cell--numeric {
+			text-align: right;
+			padding: $ontario-remcalc-16px $ontario-remcalc-24px $ontario-remcalc-16px $ontario-remcalc-16px;
+		}
+	}
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		td {
+			padding: $ontario-remcalc-12px $ontario-remcalc-8px $ontario-remcalc-12px $ontario-remcalc-16px;
+			font-size: $ontario-remcalc-16px;
+		}
+
+		td.ontario-table-cell--numeric {
+			padding: $ontario-remcalc-12px $ontario-remcalc-16px $ontario-remcalc-12px $ontario-remcalc-8px;
+		}
+
+		tbody th {
+			padding: $ontario-remcalc-12px $ontario-remcalc-8px $ontario-remcalc-12px $ontario-remcalc-16px;
+		}
+
+		tr.ontario-table-row--subtotal,
+		tfoot tr {
+			th,
+			td {
+				padding: $ontario-remcalc-16px $ontario-remcalc-8px $ontario-remcalc-16px $ontario-remcalc-16px;
+			}
+
+			td.ontario-table-cell--numeric {
+				text-align: right;
+				padding: $ontario-remcalc-16px $ontario-remcalc-16px $ontario-remcalc-16px $ontario-remcalc-8px;
+			}
+		}
+	}
+}
+
+tbody {
+	font-size: $ontario-remcalc-16px;
+
+	vertical-align: top;
+
+	tr {
+		border: solid;
+		border-width: globalFunctions.px-to-rem(1) 0;
+		border-color: $ontario-table-row-divider;
+	}
+
+	tr:last-child {
+		border-width: globalFunctions.px-to-rem(3) 0;
+		border-top-width: 0;
+		border-color: colours.$ontario-colour-black;
+	}
+
+	tr.ontario-table-row--highlight {
+		background-color: $ontario-table-highlight !important;
+
+		th {
+			padding-left: $ontario-remcalc-24px;
+			display: flex;
+			position: relative;
+
+			img.ontario-table--highlight-indicator {
+				// Width of yellow triangle svg
+				width: $ontario-remcalc-8px;
+				position: absolute;
+				// Distance from top of svg to top of container
+				top: $ontario-remcalc-24px;
+				left: 0;
+			}
+		}
+	}
+}
+
+thead {
+	border: solid;
+	border-width: globalFunctions.px-to-rem(3) 0;
+	border-color: colours.$ontario-colour-black;
+	vertical-align: top;
+
+	th {
+		text-align: left;
+		padding: $ontario-remcalc-28px $ontario-remcalc-16px $ontario-remcalc-28px $ontario-remcalc-24px;
+		margin: spacing.$spacing-0;
+		font-size: $ontario-remcalc-18px;
+		line-height: $ontario-remcalc-24px;
+		text-size-adjust: none;
+		-webkit-text-size-adjust: none;
+
+		@media screen and (max-width: breakpoints.$small-breakpoint) {
+			font-size: $ontario-remcalc-16px;
+			line-height: globalFunctions.px-to-rem(21);
+			padding: $ontario-remcalc-24-5px $ontario-remcalc-8px $ontario-remcalc-24-5px $ontario-remcalc-16px;
+		}
+	}
+
+	th.ontario-table-cell--numeric {
+		padding: $ontario-remcalc-28px $ontario-remcalc-24px $ontario-remcalc-28px $ontario-remcalc-16px;
+		text-align: right;
+
+		@media screen and (max-width: breakpoints.$small-breakpoint) {
+			padding: $ontario-remcalc-24-5px $ontario-remcalc-16px $ontario-remcalc-24-5px $ontario-remcalc-8px;
+		}
+	}
+}
+
+td.ontario-table-cell--numeric strong {
+	font-family: 'Courier Prime', Courier, 'Courier New', monospace;
+}
+
+.ontario-table-header--column-span-1 {
+	//Equivalent to 1 grid columns
+	min-width: 8.33333vw;
+}
+
+.ontario-table-header--column-span-2 {
+	//Equivalent to 2 grid columns
+	min-width: 16.66666vw;
+}
+
+.ontario-table-header--column-span-3 {
+	//Equivalent to 3 grid columns
+	min-width: 25vw;
+}
+
+.ontario-table-header--column-span-4 {
+	//Equivalent to 4 grid columns
+	min-width: 33.33333vw;
+}
+
+.ontario-table-header--column-span-5 {
+	//Equivalent to 5 grid columns
+	min-width: 41.66666vw;
+}
+
+.ontario-table-header--column-span-6 {
+	//Equivalent to 6 grid columns
+	min-width: 50vw;
+}
+
+.ontario-table-header--column-span-7 {
+	//Equivalent to 7 grid columns
+	min-width: 58.33333vw;
+}
+
+.ontario-table-header--column-span-8 {
+	//Equivalent to 8 grid columns
+	min-width: 66.66666vw;
+}
+
+.ontario-table-header--column-span-9 {
+	//Equivalent to 9 grid columns
+	min-width: 75vw;
+}
+
+.ontario-table-header--column-span-10 {
+	//Equivalent to 10 grid columns
+	min-width: 83.33333vw;
+}
+
+.ontario-table-header--column-span-11 {
+	//Equivalent to 11 grid columns
+	min-width: 91.66666vw;
+}
+
+.ontario-table-header--column-span-12 {
+	//Equivalent to 12 grid columns
+	min-width: 100vw;
+}
+
+tbody th,
+tfoot th {
+	padding: $ontario-remcalc-19px $ontario-remcalc-16px $ontario-remcalc-19px $ontario-remcalc-24px;
+	text-align: left;
+	letter-spacing: globalFunctions.px-to-rem(0.4);
+	font-weight: bold;
+
+	@media screen and (max-width: breakpoints.$small-breakpoint) {
+		font-size: $ontario-remcalc-16px;
+		line-height: globalFunctions.px-to-rem(26);
+		padding: $ontario-remcalc-19px $ontario-remcalc-8px $ontario-remcalc-19px $ontario-remcalc-16px;
+	}
+}
+
+td {
+	padding: $ontario-remcalc-19px $ontario-remcalc-16px $ontario-remcalc-19px $ontario-remcalc-24px;
+	text-align: left;
+	letter-spacing: globalFunctions.px-to-rem(0.4);
+
+	img {
+		vertical-align: top;
+		@media screen and (max-width: breakpoints.$small-breakpoint) {
+			max-width: none !important;
+		}
+	}
+}
+
+td.ontario-table-cell--numeric,
+th.ontario-table-cell--directory {
+	padding: $ontario-remcalc-19px $ontario-remcalc-24px $ontario-remcalc-19px $ontario-remcalc-16px;
+	text-align: right;
+	font-family: 'Courier Prime', Courier, 'Courier New', monospace;
+	font-size: $ontario-remcalc-17px;
+}
+
+th.ontario-table-cell--directory {
+	text-align: left;
+	font-weight: fontWeights.$ontario-font-weights-bold;
+}
+
+tr.ontario-table-row--subtotal,
+tfoot tr {
+	border: solid;
+	border-width: globalFunctions.px-to-rem(3) 0;
+	font-size: $ontario-remcalc-16px;
+	border-color: colours.$ontario-colour-black;
+
+	td {
+		font-weight: bold;
+		padding: $ontario-remcalc-23px $ontario-remcalc-16px $ontario-remcalc-23px $ontario-remcalc-24px;
+	}
+}
+
+tbody {
+	tr.ontario-table-row--subtotal {
+		th {
+			padding: $ontario-remcalc-23px $ontario-remcalc-16px $ontario-remcalc-23px $ontario-remcalc-24px;
+		}
+	}
+}
+
+tfoot {
+	vertical-align: top;
+
+	th {
+		padding: $ontario-remcalc-23px $ontario-remcalc-16px $ontario-remcalc-23px $ontario-remcalc-24px;
+	}
+}
+
+tr.ontario-table-row--subtotal {
+	background-color: $ontario-table-subtotal !important;
+}
+
+tfoot tr {
+	background-color: $ontario-table-total !important;
+}
+
+/*Table component colours*/
+.ontario-bg-ontario-table-row-divider {
+	background-color: $ontario-table-row-divider;
+}
+.ontario-bg-ontario-table-caption-background {
+	background-color: $ontario-table-caption-background;
+}
+.ontario-bg-ontario-table-highlight {
+	background-color: $ontario-table-highlight;
+}
+.ontario-bg-ontario-table-subtotal {
+	background-color: $ontario-table-subtotal;
+}
+.ontario-bg-ontario-table-total {
+	background-color: $ontario-table-total;
+}

@@ -1,0 +1,61 @@
+
+
+<dt class="fractal-dt ontario-padding-bottom-24-!">Default</dt><!-- Start: @search-box--default --><dd>
+<form action name="searchForm" id="search-example-1-form" onsubmit="return false" class="ontario-search__container" novalidate>
+    <label class="ontario-label " for="search-example-1">
+        Search the directory</label>
+
+
+    <div class="ontario-search__input-container">
+        <input type="search" name="search" id="search-example-1" autocomplete="off" aria-autocomplete="none"
+            class="ontario-input ontario-search__input" required />
+        <input class="ontario-search__reset" id="search-example-1-reset-button" type="reset" value=""
+            aria-label="Clear field" />
+        <button class="ontario-search__submit" id="search-example-1-submit-button" type="submit" onclick="handleSearch()">
+            <span class="ontario-show-for-sr">Submit</span>
+            <svg class="ontario-icon" focusable="false" sol:category="primary" viewBox="0 0 24 24"
+                preserveAspectRatio="xMidYMid meet">
+                <use xlink:href="#ontario-icon-search"></use>
+            </svg>
+        </button>
+    </div>
+</form>
+
+<script>
+    window.addEventListener('load', () => {
+        addSearchResetOnClickListener('search-example-1-reset-button', 'search-example-1');
+        addResetButtonOnSearchInputListener('search-example-1-reset-button', 'search-example-1');
+    });
+</script>
+</dd><!-- End: @search-box--default -->
+
+<dt class="fractal-dt ontario-padding-bottom-24-!">Example with hint text</dt><!-- Start: @search-box--example-with-hint-text --><dd>
+<form action name="searchForm" id="search-example-2-form" onsubmit="return false" class="ontario-search__container" novalidate>
+    <label class="ontario-label ontario-search__label" for="search-example-2">
+        Search the directory</label>
+
+    <p id="search-example-2-hint" class="ontario-hint">Search by employee name or organization name.</p>
+
+    <div class="ontario-search__input-container">
+        <input type="search" name="search" id="search-example-2" autocomplete="off" aria-autocomplete="none"
+            class="ontario-input ontario-search__input" required />
+        <input class="ontario-search__reset" id="search-example-2-reset-button" type="reset" value=""
+            aria-label="Clear field" />
+        <button class="ontario-search__submit" id="search-example-2-submit-button" type="submit" onclick="handleSearch()">
+            <span class="ontario-show-for-sr">Submit</span>
+            <svg class="ontario-icon" focusable="false" sol:category="primary" viewBox="0 0 24 24"
+                preserveAspectRatio="xMidYMid meet">
+                <use xlink:href="#ontario-icon-search"></use>
+            </svg>
+        </button>
+    </div>
+</form>
+
+<script>
+    window.addEventListener('load', () => {
+        addSearchResetOnClickListener('search-example-2-reset-button', 'search-example-2');
+        addResetButtonOnSearchInputListener('search-example-2-reset-button', 'search-example-2');
+    });
+</script>
+</dd><!-- End: @search-box--example-with-hint-text -->
+

@@ -1,0 +1,22 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/global.variables' as globalVariables;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+
+.ontario-error-messaging__content {
+	margin-left: spacing.$spacing-2;
+	max-width: globalVariables.$standard-width;
+}
+
+.ontario-input__error {
+	border-color: colours.$ontario-colour-dark-red !important; // overrides default border color on .ontario-input class
+}
+
+.ontario-checkboxes__single-option .ontario-checkboxes__error {
+	.ontario-checkboxes__label:before {
+		border-color: colours.$ontario-colour-dark-red;
+	}
+}
+
+.ontario-error__hidden {
+	display: none !important; // hides the error container
+}

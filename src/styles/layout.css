@@ -1,0 +1,332 @@
+/* ================================================
+   PHU Locator Layout
+   Page-based: heading → search card → results toggle → list or map
+   ================================================ */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.phu-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.phu-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.phu-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.125rem;
+}
+
+.phu-locator {
+  flex: 1;
+}
+
+/* ================================================
+   Hero / Page Heading
+   ================================================ */
+
+.phu-hero {
+  padding: 2rem 0 0.5rem;
+}
+
+.phu-hero .ontario-h1 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.phu-hero__description {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin: 0;
+  max-width: 48rem;
+}
+
+/* ================================================
+   Search Section (light blue card)
+   ================================================ */
+
+.phu-search-section {
+  background: #e8f0fe;
+  padding: 1.5rem 0;
+  margin-bottom: 0;
+}
+
+
+/* ================================================
+   Results Header (count + toggle)
+   ================================================ */
+
+.phu-results-header {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+}
+
+.phu-results-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.phu-results-header__count {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.125rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* View Toggle */
+.phu-view-toggle {
+  display: flex;
+  border: 2px solid #1a1a1a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.phu-view-toggle__btn {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  background: #fff;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.phu-view-toggle__btn:not(:last-child) {
+  border-right: 2px solid #1a1a1a;
+}
+
+.phu-view-toggle__btn--active {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.phu-view-toggle__btn:hover:not(.phu-view-toggle__btn--active) {
+  background: #f0f0f0;
+}
+
+/* ================================================
+   Results Area — List view
+   ================================================ */
+
+.phu-results {
+  padding: 1.5rem 0 2.5rem;
+}
+
+.phu-results__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+/* ================================================
+   Results Area — Map view with left panel + carousel
+   ================================================ */
+
+.phu-map-section {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  max-height: 800px;
+}
+
+.phu-map-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* ---- Desktop left panel ---- */
+.phu-map-panel {
+  display: none;
+}
+
+@media (min-width: 40em) {
+  .phu-map-panel {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 420px;
+    height: 100%;
+    z-index: 10;
+    background: #fff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .phu-map-panel__count {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid #e6e6e6;
+    flex-shrink: 0;
+  }
+
+  .phu-map-panel__list {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 40em) and (max-width: 72.9375em) {
+  .phu-map-panel {
+    width: 360px;
+  }
+}
+
+/* ---- Mobile carousel (below map) ---- */
+.phu-carousel {
+  display: none;
+}
+
+@media (max-width: 39.9375em) {
+  .phu-map-section {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phu-map-area {
+    position: relative;
+    height: 50vh;
+    min-height: 300px;
+  }
+
+  .phu-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .phu-carousel__item {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+    min-width: 280px;
+    max-width: 360px;
+  }
+
+  .phu-carousel__item .phu-card {
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    border-left-width: 4px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .phu-carousel__item .phu-card--selected {
+    border-color: #339999;
+  }
+}
+
+/* ================================================
+   Directory
+   ================================================ */
+
+.phu-directory {
+  padding: 2rem 1rem;
+}
+
+.phu-directory__count {
+  color: #4d4d4d;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.phu-directory__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+/* ================================================
+   Region Filter
+   ================================================ */
+
+.phu-region-filter {
+  margin-bottom: 1.5rem;
+}
+
+.phu-region-filter__label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem;
+}
+
+.phu-region-filter__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.phu-filter-btn {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.875rem;
+  padding: 0.375rem 0.875rem;
+  border: 1px solid #1a1a1a;
+  border-radius: 4px;
+  background: #fff;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1.4;
+}
+
+.phu-filter-btn:hover {
+  background: #f0f0f0;
+}
+
+.phu-filter-btn--active {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+
+.phu-filter-btn--active:hover {
+  background: #333;
+}
+
+/* ================================================
+   Active nav link
+   ================================================ */
+
+.ontario-application-subheader__menu a.active {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

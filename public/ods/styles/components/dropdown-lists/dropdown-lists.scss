@@ -1,0 +1,27 @@
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/spacing.variables' as spacing;
+@use '@ongov/ontario-design-system-global-styles/dist/styles/scss/1-variables/colours.variables' as colours;
+
+$icon-dir: '../icons' !default;
+
+:root {
+	--dropdown-arrow: url('#{$icon-dir}/ontario-material-dropdown-arrow-48px.svg');
+}
+
+.ontario-dropdown {
+	background-color: colours.$ontario-colour-white;
+	background-image: var(--dropdown-arrow);
+	background-position: right spacing.$spacing-2 center;
+	background-repeat: no-repeat;
+	background-size: spacing.$spacing-6;
+	padding-right: (spacing.$spacing-4 * 2.25);
+	cursor: pointer;
+}
+
+/* These styles are to fix differences in default styling for dropdowns in IE */
+.ontario-dropdown::-ms-expand {
+	display: none;
+}
+
+.ontario-dropdown option {
+	font-weight: normal;
+}
