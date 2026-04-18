@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react';
 import type { FeatureCollection } from 'geojson';
 import type { NormalizedPHU } from '../types/phu';
 import { slugify } from '../utils/slugify';
@@ -12,22 +12,50 @@ interface MapContextValue {
   boundaryGeoJSON: FeatureCollection | null;
   viewMode: ViewMode;
   resultView: ResultView;
+  selectedRegion: string | null;
   setSelectedPHU: (id: number | null) => void;
   setHoveredPHU: (id: number | null) => void;
   setBoundaryGeoJSON: (geojson: FeatureCollection) => void;
   setViewMode: (mode: ViewMode) => void;
   setResultView: (view: ResultView) => void;
+  setSelectedRegion: (region: string | null) => void;
 }
 
-function parseHash(phus: NormalizedPHU[]): { view: ViewMode; phuId: number | null } {
-  const hash = window.location.hash.slice(1);
-  if (hash === 'directory') return { view: 'directory', phuId: null };
-  if (hash.startsWith('phu/')) {
-    const slug = hash.slice(4);
+interface ParsedHash {
+  view: ViewMode;
+  resultView: ResultView;
+  phuId: number | null;
+  region: string | null;
+}
+
+function parseHash(phus: NormalizedPHU[]): ParsedHash {
+  const raw = window.location.hash.slice(1);
+  // Split on '?' to separate path from query params
+  const [path, queryString] = raw.split('?');
+  const params = new URLSearchParams(queryString || '');
+  const region = params.get('region') || null;
+
+  if (path === 'directory') return { view: 'directory', resultView: 'list', phuId: null, region: null };
+  if (path.startsWith('phu/')) {
+    const slug = path.slice(4);
     const phu = phus.find(p => slugify(p.name_en) === slug);
-    if (phu) return { view: 'locator', phuId: phu.id };
+    if (phu) return { view: 'locator', resultView: 'map', phuId: phu.id, region: null };
   }
-  return { view: 'locator', phuId: null };
+  if (path === 'map') return { view: 'locator', resultView: 'map', phuId: null, region };
+  // 'list', '', or anything else → list view
+  return { view: 'locator', resultView: 'list', phuId: null, region };
+}
+
+function buildHash(resultView: ResultView, selectedPHUId: number | null, region: string | null, phus: NormalizedPHU[]): string {
+  // Specific PHU selected → #phu/slug (takes priority)
+  if (selectedPHUId !== null) {
+    const phu = phus.find(p => p.id === selectedPHUId);
+    if (phu) return `phu/${slugify(phu.name_en)}`;
+  }
+  // Build path + optional region param
+  const path = resultView === 'map' ? 'map' : 'list';
+  if (region) return `${path}?region=${encodeURIComponent(region)}`;
+  return path;
 }
 
 const MapContext = createContext<MapContextValue>({
@@ -36,11 +64,13 @@ const MapContext = createContext<MapContextValue>({
   boundaryGeoJSON: null,
   viewMode: 'locator',
   resultView: 'list',
+  selectedRegion: null,
   setSelectedPHU: () => {},
   setHoveredPHU: () => {},
   setBoundaryGeoJSON: () => {},
   setViewMode: () => {},
   setResultView: () => {},
+  setSelectedRegion: () => {},
 });
 
 export function MapProvider({ children, phus }: { children: ReactNode; phus: NormalizedPHU[] }) {
@@ -48,44 +78,60 @@ export function MapProvider({ children, phus }: { children: ReactNode; phus: Nor
   const [hoveredPHUId, setHoveredPHUId] = useState<number | null>(null);
   const [boundaryGeoJSON, setBoundaryGeoJSONState] = useState<FeatureCollection | null>(null);
   const [viewMode, setViewModeState] = useState<ViewMode>('locator');
-  const [resultView, setResultView] = useState<ResultView>('map');
+  const [resultView, setResultViewState] = useState<ResultView>('list');
+  const [selectedRegion, setSelectedRegionState] = useState<string | null>(null);
 
-  // Parse hash once PHUs are loaded
+  // Guard to prevent hash → state → hash feedback loops
+  const updatingFromHash = useRef(false);
+
+  function applyHash(parsed: ParsedHash) {
+    updatingFromHash.current = true;
+    setViewModeState(parsed.view);
+    setResultViewState(parsed.resultView);
+    setSelectedPHUId(parsed.phuId);
+    setSelectedRegionState(parsed.region);
+    // Reset guard after React processes the state batch
+    queueMicrotask(() => { updatingFromHash.current = false; });
+  }
+
+  // Sync hash → state on initial load
   useEffect(() => {
     if (phus.length === 0) return;
-    const { view, phuId } = parseHash(phus);
-    setViewModeState(view);
-    setSelectedPHUId(phuId);
+    applyHash(parseHash(phus));
   }, [phus]);
+
+  // Sync state → hash (skipped when change originated from hash)
+  useEffect(() => {
+    if (phus.length === 0 || updatingFromHash.current) return;
+    if (viewMode === 'directory') {
+      window.location.hash = 'directory';
+    } else {
+      window.location.hash = buildHash(resultView, selectedPHUId, selectedRegion, phus);
+    }
+  }, [resultView, selectedPHUId, selectedRegion, viewMode, phus]);
 
   const setSelectedPHU = useCallback((id: number | null) => {
     setSelectedPHUId(id);
-    if (id !== null) {
-      const phu = phus.find(p => p.id === id);
-      if (phu) {
-        window.location.hash = `phu/${slugify(phu.name_en)}`;
-      }
-    } else {
-      window.location.hash = '';
-    }
-  }, [phus]);
+    if (id !== null) setSelectedRegionState(null);
+  }, []);
+
+  const setResultView = useCallback((view: ResultView) => {
+    setResultViewState(view);
+  }, []);
+
+  const setSelectedRegion = useCallback((region: string | null) => {
+    setSelectedRegionState(region);
+  }, []);
 
   const setViewMode = useCallback((mode: ViewMode) => {
     setViewModeState(mode);
-    if (mode === 'directory') {
-      window.location.hash = 'directory';
-    } else {
-      window.location.hash = '';
-    }
   }, []);
 
   // Listen for hash changes (back/forward)
   useEffect(() => {
     if (phus.length === 0) return;
     const onHashChange = () => {
-      const { view, phuId } = parseHash(phus);
-      setViewModeState(view);
-      setSelectedPHUId(phuId);
+      applyHash(parseHash(phus));
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
@@ -101,11 +147,13 @@ export function MapProvider({ children, phus }: { children: ReactNode; phus: Nor
       boundaryGeoJSON,
       viewMode,
       resultView,
+      selectedRegion,
       setSelectedPHU,
       setHoveredPHU,
       setBoundaryGeoJSON,
       setViewMode,
       setResultView,
+      setSelectedRegion,
     }}>
       {children}
     </MapContext.Provider>
