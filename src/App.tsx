@@ -164,11 +164,6 @@ function LocatorView() {
         <div className="phu-map-section">
           {/* Left panel over map */}
           <div className="phu-map-panel">
-            <p className="phu-map-panel__count">
-              {filteredPHUs.length === 1
-                ? t('showingOne', language)
-                : t('showing', language, { count: filteredPHUs.length, total: phus.length })}
-            </p>
             <div className="phu-map-panel__list">
               {filteredPHUs.map((phu) => (
                 <PHUCard
