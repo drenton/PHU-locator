@@ -52,7 +52,7 @@ export function PHUMap({
   useEffect(() => {
     if (!mapReady || !mapRef.current || !geojson) return;
 
-    // Clear all selections when nothing is selected
+    // Clear all selections and zoom back to Ontario when nothing is selected
     if (selectedPHUId === null) {
       const map = mapRef.current.getMap();
       if (map.getSource('phu-boundaries')) {
@@ -65,6 +65,11 @@ export function PHUMap({
           );
         }
       }
+      const isDesktop = window.innerWidth >= 640;
+      map.fitBounds(ONTARIO_BOUNDS, {
+        padding: { top: 20, bottom: 20, left: isDesktop ? 440 : 20, right: 20 },
+        duration: 800,
+      });
       return;
     }
 
