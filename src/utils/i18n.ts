@@ -2,7 +2,7 @@ import type { Language } from '../types/phu';
 
 const translations = {
   en: {
-    appTitle: 'Public Health Unit Locator',
+    appTitle: 'Find your public health unit',
     subtitle: 'Ministry of Health',
     pageHeading: 'Find your public health unit',
     pageDescription: 'Search for a public health unit by municipality, city, town, or postal code. You can also browse all 34 public health units in Ontario.',
@@ -52,9 +52,11 @@ const translations = {
     privacy: 'Privacy',
     contactUs: 'Contact us',
     copyright: "King's Printer for Ontario, 2012\u201326",
+    metaTitle: 'Find your public health unit | ontario.ca',
+    metaDescription: 'Find contact information for your local public health unit in Ontario. Search by municipality, city, town, or postal code.',
   },
   fr: {
-    appTitle: 'Localisateur des bureaux de sant\u00e9 publique',
+    appTitle: 'Trouvez votre bureau de sant\u00e9 publique',
     subtitle: 'Minist\u00e8re de la Sant\u00e9',
     pageHeading: 'Trouvez votre bureau de sant\u00e9 publique',
     pageDescription: 'Recherchez un bureau de sant\u00e9 publique par municipalit\u00e9, ville ou code postal. Vous pouvez \u00e9galement parcourir les 34 bureaux de sant\u00e9 publique de l\u2019Ontario.',
@@ -104,6 +106,8 @@ const translations = {
     privacy: 'Confidentialit\u00e9',
     contactUs: 'Contactez-nous',
     copyright: "Imprimeur du Roi pour l\u2019Ontario, 2012\u201326",
+    metaTitle: 'Trouvez votre bureau de sant\u00e9 publique | ontario.ca',
+    metaDescription: 'Trouvez les coordonn\u00e9es de votre bureau de sant\u00e9 publique en Ontario. Recherchez par municipalit\u00e9, ville ou code postal.',
   },
 } as const;
 

@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
 import type { Language } from '../types/phu';
+import { t } from '../utils/i18n';
 
 interface LanguageContextValue {
   language: Language;
@@ -23,11 +24,22 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLanguageState(lang);
     localStorage.setItem('phu-lang', lang);
     document.documentElement.lang = lang;
+    document.title = t('metaTitle', lang);
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t('metaDescription', lang));
   }, []);
 
   const toggleLanguage = useCallback(() => {
     setLanguage(language === 'en' ? 'fr' : 'en');
   }, [language, setLanguage]);
+
+  // Set title, meta description, and lang attribute on initial load
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.title = t('metaTitle', language);
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t('metaDescription', language));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage }}>
