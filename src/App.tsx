@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { PageLayout } from './components/layout/PageLayout';
 import { SearchBar } from './components/search/SearchBar';
 import { PHUCardList } from './components/cards/PHUCardList';
@@ -58,6 +58,15 @@ function LocatorView() {
     clearSearch();
     setSelectedPHU(null);
   };
+
+  // Clear search when selectedPHUId is reset via hash navigation (e.g. header link)
+  const prevSelectedPHUId = useRef(selectedPHUId);
+  useEffect(() => {
+    if (prevSelectedPHUId.current !== null && selectedPHUId === null) {
+      clearSearch();
+    }
+    prevSelectedPHUId.current = selectedPHUId;
+  }, [selectedPHUId, clearSearch]);
 
   if (phusLoading) {
     return (
