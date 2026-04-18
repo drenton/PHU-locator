@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import type { NormalizedPHU, Language } from '../../types/phu';
 import { t } from '../../utils/i18n';
 
@@ -9,9 +10,18 @@ interface RegionFilterProps {
 }
 
 export function RegionFilter({ phus, lang, selectedRegion, onSelectRegion }: RegionFilterProps) {
-  const regions = Array.from(
-    new Set(phus.map((p) => (lang === 'fr' ? p.region_fr : p.region_en)))
-  ).sort();
+  // Build list of regions: { key: english name (stable), label: localized name }
+  const regions = useMemo(() => {
+    const seen = new Set<string>();
+    const list: { key: string; label: string }[] = [];
+    for (const p of phus) {
+      if (!seen.has(p.region_en)) {
+        seen.add(p.region_en);
+        list.push({ key: p.region_en, label: lang === 'fr' ? p.region_fr : p.region_en });
+      }
+    }
+    return list.sort((a, b) => a.label.localeCompare(b.label));
+  }, [phus, lang]);
 
   return (
     <div className="phu-region-filter" role="group" aria-label={t('filterByRegion', lang)}>
@@ -24,14 +34,14 @@ export function RegionFilter({ phus, lang, selectedRegion, onSelectRegion }: Reg
         >
           {t('allRegions', lang)}
         </button>
-        {regions.map((region) => (
+        {regions.map(({ key, label }) => (
           <button
-            key={region}
-            className={`ontario-badge ${selectedRegion === region ? 'ontario-badge--default-heavy' : 'ontario-badge--neutral-light'} phu-filter-badge`}
-            onClick={() => onSelectRegion(region)}
-            aria-pressed={selectedRegion === region}
+            key={key}
+            className={`ontario-badge ${selectedRegion === key ? 'ontario-badge--default-heavy' : 'ontario-badge--neutral-light'} phu-filter-badge`}
+            onClick={() => onSelectRegion(key)}
+            aria-pressed={selectedRegion === key}
           >
-            {region}
+            {label}
           </button>
         ))}
       </div>

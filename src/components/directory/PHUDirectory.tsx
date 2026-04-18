@@ -15,11 +15,8 @@ export function PHUDirectory({ phus, lang }: PHUDirectoryProps) {
 
   const filtered = useMemo(() => {
     if (!selectedRegion) return phus;
-    return phus.filter((p) => {
-      const region = lang === 'fr' ? p.region_fr : p.region_en;
-      return region === selectedRegion;
-    });
-  }, [phus, selectedRegion, lang]);
+    return phus.filter((p) => p.region_en === selectedRegion);
+  }, [phus, selectedRegion]);
 
   return (
     <div className="phu-directory">
